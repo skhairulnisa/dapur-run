@@ -1,0 +1,6 @@
+node_modules/
+tests/node_modules/
+tests/_*.html
+tests/*.png
+tests/*.pdf
+tests/backup.json
