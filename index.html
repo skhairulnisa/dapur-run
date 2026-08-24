@@ -334,6 +334,30 @@ th.price,td.price{width:110px;text-align:right}
 }
 .pinput:hover{border-color:var(--muted)}
 .pmirror{display:none}
+.est{display:flex;flex-direction:column;gap:3px;min-width:0}
+.estrow{display:flex;align-items:center;gap:6px}
+.estrow .cursign{font-size:12px;color:var(--muted);font-family:var(--f-mono)}
+.eput{
+  width:100%;padding:8px 9px;border:1px solid var(--line2);border-radius:var(--r-sm);
+  background:var(--surface);font-family:var(--f-mono);font-size:13.5px;text-align:right;
+  font-variant-numeric:tabular-nums;
+}
+.eput:hover{border-color:var(--muted)}
+.eput.seeded{border-style:dashed}
+.srcnote{font-size:10.5px;color:var(--muted);line-height:1.25;overflow-wrap:anywhere}
+.fields3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.tally .est-line{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.tally .est-line b{font-family:var(--f-mono);font-weight:600;color:var(--ink2)}
+.estbar{
+  display:flex;gap:16px;flex-wrap:wrap;align-items:baseline;margin:0 0 14px;padding:12px 14px;
+  background:var(--surface2);border:1px solid var(--line);border-radius:var(--r-sm);
+}
+.estbar .lab{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.estbar .val{font-family:var(--f-mono);font-size:17px;font-weight:600;font-variant-numeric:tabular-nums}
+.estbar .diff.over{color:var(--danger)}
+.estbar .diff.under{color:var(--accent)}
+th.est,td.est{width:104px;text-align:right;font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+td.est{color:var(--muted)}
 tr.bought td.nm2{font-weight:600}
 tr.notbought td.nm2,tr.notbought td.qty{color:var(--muted)}
 .cur{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--ink2)}
@@ -382,6 +406,9 @@ tr.done td.nm2{text-decoration:line-through;color:var(--muted)}
   th.price,td.price{width:78px}
   .pinput{max-width:74px;padding:6px 7px;font-size:13.5px}
   .totals .sum{font-size:19px}
+  .fields3{grid-template-columns:1fr 1fr}
+  .est{grid-column:1/-1}
+  th.est,td.est{width:70px}
   .listactions{gap:8px}
   .listactions .btn{flex:1 1 45%;text-align:center}
   .meta{gap:10px}
@@ -461,6 +488,11 @@ tr.done td.nm2{text-decoration:line-through;color:var(--muted)}
   .pinput{display:none !important}
   .pmirror{display:inline;font-size:9pt;color:#000}
   th.price,td.price{width:24mm}
+  th.est,td.est{width:22mm;color:#000}
+  .estbar{display:flex !important;gap:6mm;border:0;background:#fff;padding:0;margin:0 0 2mm}
+  .estbar .lab{font-size:7.5pt;color:#000}
+  .estbar .val{font-size:10pt}
+  .srcnote,.est{display:none !important}
   .totals{border-top:1pt solid #000;margin-top:2mm;padding-top:1.5mm}
   .totals .cnt{font-size:9pt;color:#000}
   .totals .sum{font-size:12pt}
@@ -514,6 +546,10 @@ tr.done td.nm2{text-decoration:line-through;color:var(--muted)}
       <label class="chk"><input type="checkbox" id="withpics" checked>
         Show photos in the list, printout and PDF</label>
     </div>
+    <div class="estbar" id="estbar" hidden>
+      <span><span class="lab">Estimated spend</span><br><span class="val" id="estsum"></span></span>
+      <span><span class="lab">Coverage</span><br><span class="val" id="estnote" style="font-size:13px"></span></span>
+    </div>
     <div id="listbody"></div>
     <div class="listactions">
       <button type="button" class="btn" id="backedit">Edit selection</button>
@@ -537,6 +573,10 @@ tr.done td.nm2{text-decoration:line-through;color:var(--muted)}
       <label class="cur">Currency
         <input type="text" id="mcur" maxlength="4" autocomplete="off" aria-label="Currency symbol"></label>
     </div>
+    <div class="estbar" id="bestbar" hidden>
+      <span><span class="lab">Estimated</span><br><span class="val" id="bestsum"></span></span>
+      <span><span class="lab" id="bestdifflab">Difference</span><br><span class="val diff" id="bestdiff"></span></span>
+    </div>
     <div id="boughtbody"></div>
     <div class="totals" id="totals" hidden>
       <span class="cnt" id="boughtcount"></span>
@@ -553,7 +593,7 @@ tr.done td.nm2{text-decoration:line-through;color:var(--muted)}
 
 <div class="dock" id="dock">
   <div class="dock-in">
-    <span class="tally"><b id="tally">0</b><span id="tallysub">nothing ticked yet</span></span>
+    <span class="tally"><b id="tally">0</b><span id="tallysub">nothing ticked yet</span><span class="est-line" id="estline" hidden></span></span>
     <button type="button" class="btn btn-primary btn-lg" id="makelist" disabled>Create Shopping List</button>
   </div>
 </div>
@@ -570,17 +610,19 @@ var KEY = "dapurRun.v1";
 var BYID = {}, CATOF = {}, MINE = {};
 CATS.forEach(function(c){ c.items.forEach(function(i){ BYID[i.id] = i.name; CATOF[i.id] = c.key; }); });
 
-var S = { sel:{}, qty:{}, stk:{}, done:{}, collapsed:{}, photos:{}, price:{}, auto:{},
+var S = { sel:{}, qty:{}, stk:{}, done:{}, collapsed:{}, photos:{}, price:{}, est:{}, auto:{},
           custom:[], pics:true, cur:"RM", meta:{date:"",store:"",notes:""}, view:"edit" };
+/* typical Lotus's shelf prices, looked up 24 Aug 2026 — a starting point you can edit */
+var SEED = {"vegetables-fresh-cooking-ingredients-bawang-putih":{"p":4.99,"t":"BAWANG PUTIH -500G (PURE WHITE)"},"vegetables-fresh-cooking-ingredients-carrot":{"p":4.99,"t":"LOBAK MERAH AUST/AUST CARROTS 1KG -PKT"},"vegetables-fresh-cooking-ingredients-tomato":{"p":4.69,"t":"LOTUSS TOMATO 600G"},"vegetables-fresh-cooking-ingredients-cili-hijau":{"p":9.89,"t":"CILI HIJAU - KG (3551)"},"vegetables-fresh-cooking-ingredients-lengkuas":{"p":6.89,"t":"LENGKUAS - KG (3082)"},"vegetables-fresh-cooking-ingredients-daun-sup":{"p":3.99,"t":"DAUN SADERI CHINA IKAT/CHINA CELERY-BDL"},"vegetables-fresh-cooking-ingredients-daun-ketumbar":{"p":3.69,"t":"DAUN KETUMBAR 250G"},"vegetables-fresh-cooking-ingredients-limau-kasturi":{"p":2.49,"t":"LIMAU KASTURI 500G"},"vegetables-fresh-cooking-ingredients-sawi":{"p":4.89,"t":"SAWI CAMERON 1KG-PEK"},"vegetables-fresh-cooking-ingredients-brokoli":{"p":1.99,"t":"BROKOLI CHINA/CHINA BROCCOLI-PCS (2046)"},"vegetables-fresh-cooking-ingredients-kacang-panjang":{"p":1.79,"t":"KACANG PANJANG / LONG BEANS 250G"},"vegetables-fresh-cooking-ingredients-bendi":{"p":2.59,"t":"LOTUSS BENDI 250G"},"vegetables-fresh-cooking-ingredients-jagung":{"p":4.89,"t":"LOTUSS JAGUNG MANIS BIO CAMERON"},"vegetables-fresh-cooking-ingredients-salad-lettuce":{"p":6.49,"t":"LOTUSS SALAD CAMPURAN KLASIK 230G"},"vegetables-fresh-cooking-ingredients-kacang-buncis":{"p":3.59,"t":"LOTUSS KACANG BUNCIS 250G"},"chicken-meat-fish-seafood-ikan-siakap":{"p":10.79,"t":"IKAN SIAKAP L (PCS) (8790)"},"chicken-meat-fish-seafood-ikan-selar":{"p":7.85,"t":"CENCARU L (KG) (9007)"},"frozen-food-sausage":{"p":6.15,"t":"AYAMAS CHICKEN FRANKFURTER 340G"},"rice-noodles-pasta-dry-food-beras":{"p":27.9,"t":"BAHAGIA BERAS THAI IMPORT 10KG"},"rice-noodles-pasta-dry-food-mi-sedap":{"p":5.85,"t":"MI SEDAAP GORENG ASLI JUMBO 4X139G"},"rice-noodles-pasta-dry-food-maggi-kari":{"p":6.35,"t":"MAGGI 2-MINN BIG CURRY 5X106G"},"rice-noodles-pasta-dry-food-spaghetti":{"p":4.49,"t":"PREGO SPAGHETTI 500G"},"rice-noodles-pasta-dry-food-roti-bread":{"p":4.3,"t":"GARDENIA ORIGINAL CLASSIC JUMBO (600G)"},"rice-noodles-pasta-dry-food-tepung-gandum":{"p":3.4,"t":"FAIZA TEPUNG GANDUM 1KG"},"rice-noodles-pasta-dry-food-tepung-jagung":{"p":1.7,"t":"STAR TEPUNG JAGUNG 400G"},"rice-noodles-pasta-dry-food-tepung-goreng-ayam-seasoned-flour":{"p":2.6,"t":"SERI AJI TEPUNG GORENG PEDAS 150G"},"cooking-sauces-seasoning-spices-gula-putih":{"p":2.7,"t":"PRAI CASTER SUGAR 500G"},"cooking-sauces-seasoning-spices-gula-perang":{"p":4.8,"t":"CSR NATURAL BROWN SUGAR 1KG"},"cooking-sauces-seasoning-spices-kicap-manis":{"p":5.55,"t":"MAHSURI KICAP MANIS PEDAS 410ML"},"cooking-sauces-seasoning-spices-kicap-masin":{"p":4.6,"t":"ADABI KICAP MASIN 340ML"},"cooking-sauces-seasoning-spices-sos-tiram":{"p":8.49,"t":"ADABI SOS TIRAM 510ML"},"cooking-sauces-seasoning-spices-mayonnaise":{"p":7.99,"t":"LOTUSS REAL MAYONNAISE 470ML"},"cooking-sauces-seasoning-spices-cuka":{"p":3.89,"t":"YAKIN CUKA BUATAN 640ML"},"cooking-sauces-seasoning-spices-serbuk-kari-ayam-daging":{"p":6.65,"t":"FAIZA KARI DAGING 220G"},"cooking-sauces-seasoning-spices-serbuk-kari-ikan":{"p":6.65,"t":"FAIZA KARI IKAN 220G"},"cooking-sauces-seasoning-spices-serbuk-cili":{"p":5.39,"t":"FAIZA SERBUK CILI 125G"},"cooking-sauces-seasoning-spices-cukup-rasa-seasoning":{"p":5.99,"t":"MAGGI CUKUP RASA AIO SEAS 300G"},"cooking-sauces-seasoning-spices-asam-jawa":{"p":4.45,"t":"ADABI ASAM JAWA XTRA 200G"},"cooking-sauces-seasoning-spices-santan":{"p":3.65,"t":"MS SANTAN 200ML"},"cooking-sauces-seasoning-spices-rempah-kurma":{"p":4.75,"t":"ADABI REMPAH KURMA 100G"},"cooking-sauces-seasoning-spices-sos-pasta-bolognese":{"p":7.5,"t":"PREGO TRADITIONAL PASTA SAUCE 350G"},"cooking-sauces-seasoning-spices-sos-carbonara":{"p":9.15,"t":"PREGO CARBONARA MUSHROOM 350G"},"dairy-chilled-breakfast-susu-fresh-milk":{"p":16.7,"t":"FARM FRESH MILK 2L"},"dairy-chilled-breakfast-butter":{"p":13.29,"t":"ANCHOR PURE NEW ZEALAND BUTTER 227G"},"dairy-chilled-breakfast-margarine":{"p":10.99,"t":"NATUREL SOFT MARGARINE 500G"},"dairy-chilled-breakfast-coffee":{"p":4.65,"t":"KAPAL API KOPI CAMPURAN HALUS 158G"},"baby-groceries-baby-vegetables-carrot":{"p":4.99,"t":"LOBAK MERAH AUST/AUST CARROTS 1KG -PKT"},"baby-groceries-baby-vegetables-broccoli":{"p":1.99,"t":"BROKOLI CHINA/CHINA BROCCOLI-PCS (2046)"},"baby-groceries-baby-vegetables-pumpkin-labu":{"p":2.89,"t":"LABU MANIS / GOLDEN PUMPKIN - KG (3542)"},"baby-groceries-baby-vegetables-sweet-potato-keledek":{"p":4.99,"t":"UBI KELEDEK MADU 500G/HONEY SWEET POTATO 500G"},"baby-groceries-baby-vegetables-tomato":{"p":4.69,"t":"LOTUSS TOMATO 600G"},"baby-groceries-baby-vegetables-jagung":{"p":4.89,"t":"LOTUSS JAGUNG MANIS BIO CAMERON"},"baby-groceries-baby-protein-siakap":{"p":10.79,"t":"IKAN SIAKAP L (PCS) (8790)"},"baby-groceries-baby-fruits-banana":{"p":6.99,"t":"PISANG BERANGAN-KG(2406)"},"baby-groceries-baby-fruits-apple":{"p":11.99,"t":"LOTUSS EPAL GRANNY SMITH 10S"},"baby-groceries-baby-fruits-pear":{"p":8.99,"t":"CENTURY PEAR 4S"},"baby-groceries-baby-fruits-avocado":{"p":5.99,"t":"AVOKADO - BIJI (2881)"},"baby-groceries-baby-fruits-papaya":{"p":6.99,"t":"LOTUSS BETIK SEKAKI - KG(2389)"},"baby-groceries-baby-fruits-mango":{"p":6.99,"t":"MANGGA FARLAN THAI-KG(2884)"},"baby-groceries-baby-carbs-staples-baby-oats":{"p":10.65,"t":"QUAKER INSTANT OATMEAL 1KG FOIL"},"baby-groceries-baby-dairy-snacks-baby-yogurt":{"p":1.45,"t":"FERNLEAF LOW FAT YOGURT NATURAL 110G"},"baby-groceries-baby-dairy-snacks-cheese":{"p":11.75,"t":"CHESDALE CHEESE PLAIN 12S 250G"},"baby-groceries-baby-dairy-snacks-unsalted-butter":{"p":12.4,"t":"SCS PORTION UNSALTED BUTTER 10GX12"},"baby-groceries-baby-dairy-snacks-baby-puffs":{"p":11.9,"t":"GNUBKINS ORG S.BERRY PUFFS W.STRFISH 32G"},"canned-jarred-packaged-food-sardine":{"p":4.95,"t":"AYAM BRAND SARDINES IN TMT SAUCE 155G"},"canned-jarred-packaged-food-tuna":{"p":5.99,"t":"LOTUSS TUNA FLAKES IN OLIVE 150G"},"canned-jarred-packaged-food-baked-beans":{"p":3.2,"t":"BUMBLE BEE BAKED BEANS 425G"},"household-cleaning-laundry-detergent":{"p":11.49,"t":"VALUE LIQUID DETERGENT 4KG"},"household-cleaning-floor-cleaner":{"p":4.99,"t":"VALUE FLOOR CLEANER 1.8L"},"household-cleaning-garbage-bags":{"p":2.99,"t":"LOTUSS BLUE HDPE GARBAGE BAG S30S"},"household-cleaning-kitchen-tissue":{"p":12.9,"t":"VINDA DELUXE KITCHEN TOWEL 6X80S"},"household-cleaning-wet-wipes":{"p":9.9,"t":"TEMPO PROTECT MINI WET WIPES 6X8S"},"household-cleaning-insect-spray":{"p":7.5,"t":"SHIELDTOX AE ATTACK AEROSOL 270ML"},"household-cleaning-hand-wash-hand-soap":{"p":3.99,"t":"ALIV HAND WASH POUCH 400ML COASTAL WATER"},"personal-care-toiletries-shampoo":{"p":7.5,"t":"ALIV HAIR SHAMPOO 750ML ARGAN OIL"},"personal-care-toiletries-conditioner":{"p":7.5,"t":"ALIV HAIR CONDITIONER 750ML"},"personal-care-toiletries-toothpaste":{"p":5.29,"t":"VALUE TOOTHPASTE 200GX2"},"personal-care-toiletries-face-moisturiser":{"p":10.95,"t":"SAFI PELEMBAP MUKA GAMAT 50G"},"personal-care-toiletries-deodorant":{"p":15.99,"t":"REXONA (W) DEO RO VIBRANT SAKURA 2X45ML"},"personal-care-toiletries-cotton-buds":{"p":3.29,"t":"PREMIER COTTON BUDS 4X160 TIPS"},"personal-care-toiletries-pantyliner":{"p":12.9,"t":"INTIMATE LONG+WIDER PANTYLINERS 60S"},"personal-care-toiletries-hair-oil-serum":{"p":24.89,"t":"GVC HAIR SERUM MULTIPLE REPAIR 100ML"},"baby-care-essentials-baby-wet-wipes":{"p":6.99,"t":"CUTE+CARE BABY WIPES FRAG FREE 80SX2"},"baby-care-essentials-baby-body-wash":{"p":28.9,"t":"JOHNSONS BABY BATH MILK + RICE 1L"},"baby-care-essentials-baby-hand-mouth-wipes":{"p":6.99,"t":"CUTE+CARE BABY WIPES FRAG FREE 80SX2"}};
 var ORIG = {};   /* the photo each item shipped with, so one can always be restored */
 
 /* ---------- storage ---------- */
 function hydrate(o){
   if(!o || typeof o !== "object") return false;
   if(o.state && typeof o.state === "object") o = o.state;   /* unwrap a backup file */
-  var fresh = { sel:{}, qty:{}, stk:{}, done:{}, collapsed:{}, photos:{}, price:{}, auto:{},
+  var fresh = { sel:{}, qty:{}, stk:{}, done:{}, collapsed:{}, photos:{}, price:{}, est:{}, auto:{},
                 custom:[], pics:true, cur:"RM", meta:{date:"",store:"",notes:""}, view:"edit" };
-  ["sel","qty","stk","done","collapsed","photos","price","auto"].forEach(function(k){
+  ["sel","qty","stk","done","collapsed","photos","price","est","auto"].forEach(function(k){
     if(o[k] && typeof o[k] === "object" && !Array.isArray(o[k])) fresh[k] = o[k];
   });
   if(typeof o.pics === "boolean") fresh.pics = o.pics;
@@ -628,9 +670,35 @@ function esc(s){ return String(s).replace(/[&<>"]/g, function(c){
 /* ---------- painting the checklist ---------- */
 var itemEls = {};
 $$(".item").forEach(function(el){
-  itemEls[el.dataset.id] = el;
-  ORIG[el.dataset.id] = $(".thumb", el).getAttribute("src");
+  var id = el.dataset.id;
+  itemEls[id] = el;
+  ORIG[id] = $(".thumb", el).getAttribute("src");
+  var fields = $(".fields", el);
+  fields.className = "fields3";
+  var lab = document.createElement("label"); lab.className = "f est";
+  var cap = document.createElement("span"); cap.className = "fl"; cap.textContent = "Est. price";
+  var inp = document.createElement("input");
+  inp.className = "eput"; inp.type = "text"; inp.inputMode = "decimal";
+  inp.autocomplete = "off"; inp.placeholder = "0.00";
+  inp.setAttribute("aria-label", "Estimated price for " + $(".nm", el).textContent);
+  lab.appendChild(cap); lab.appendChild(inp);
+  if(SEED[id]){
+    var note = document.createElement("span");
+    note.className = "srcnote"; note.textContent = SEED[id].t;
+    note.title = "Lotus's shelf price, 24 Aug 2026 — edit it if yours differs";
+    lab.appendChild(note);
+  }
+  fields.appendChild(lab);
 });
+/* first run: start the estimates from the looked-up prices */
+function seedEstimates(){
+  var n = 0;
+  if(!S.est || typeof S.est !== "object") S.est = {};
+  Object.keys(SEED).forEach(function(id){
+    if(S.est[id] === undefined){ S.est[id] = String(SEED[id].p); n++; }
+  });
+  return n;
+}
 function photoFor(id){ return S.photos[id] || ORIG[id]; }
 
 function paintItem(id){
@@ -643,6 +711,11 @@ function paintItem(id){
   $(".cb", el).checked = on;
   $(".q", el).value = S.qty[id] || "";
   $(".s", el).value = S.stk[id] || "";
+  var ep = $(".eput", el);
+  if(ep && document.activeElement !== ep){
+    ep.value = S.est[id] || "";
+    ep.classList.toggle("seeded", !!(SEED[id] && String(SEED[id].p) === S.est[id]));
+  }
 }
 function paintCat(key){
   var sec = $('.cat[data-key="'+key+'"]'); if(!sec) return;
@@ -656,8 +729,17 @@ function paintCat(key){
 function paintTally(){
   var n = selectedIds().length;
   $("#tally").textContent = n;
-  $("#tallysub").textContent = n === 0 ? "nothing ticked yet"
-    : (n === 1 ? "item ticked" : "items ticked");
+  var e = estimateTotal();
+  var line = $("#estline");
+  if(n === 0){
+    $("#tallysub").textContent = "nothing ticked yet";
+    line.hidden = true;
+  }else{
+    $("#tallysub").textContent = (n === 1 ? "item ticked" : "items ticked");
+    line.hidden = false;
+    line.innerHTML = "about <b>" + esc(S.cur) + " " + money(e.sum) + "</b>"
+      + (e.unpriced ? " \u00b7 " + e.unpriced + " with no price yet" : "");
+  }
   $("#makelist").disabled = n === 0;
 }
 function paintAll(){
@@ -677,7 +759,7 @@ function paintAll(){
 /* ---------- selection ---------- */
 function wipe(id){
   delete S.sel[id]; delete S.done[id]; delete S.price[id];
-  delete S.qty[id]; delete S.stk[id]; delete S.auto[id];
+  delete S.qty[id]; delete S.stk[id]; delete S.auto[id];   /* the estimate is kept: it is a price, not a choice */
 }
 function setSel(id, on){
   if(on) S.sel[id] = 1; else wipe(id);
@@ -697,6 +779,14 @@ $("#checklist").addEventListener("click", function(e){
 });
 /* typing a quantity or stock value ticks the item automatically */
 $("#checklist").addEventListener("input", function(e){
+  var ep = e.target.closest && e.target.closest(".eput");
+  if(ep){
+    var eid = ep.closest(".item").dataset.id, ev = ep.value.trim();
+    if(ev) S.est[eid] = ev; else delete S.est[eid];
+    ep.classList.remove("seeded");
+    paintTally(); save();
+    return;
+  }
   var inp = e.target;
   if(!inp.classList || !inp.classList.contains("num")) return;
   var it = inp.closest(".item"), id = it.dataset.id;
@@ -704,6 +794,7 @@ $("#checklist").addEventListener("input", function(e){
   var v = inp.value.trim();
   if(v) store[id] = v; else delete store[id];
   if(v && !S.sel[id]){ setSel(id, true); return; }
+  paintTally();                      /* quantity feeds the estimate, so refresh it */
   /* emptied both boxes: take the item off the list, however it was ticked */
   if(!S.qty[id] && !S.stk[id] && S.sel[id]){
     var label = BYID[id];
@@ -752,7 +843,7 @@ function buildCard(id, name){
   var nl = el("label", "nmlab", {"for": "cb_" + id});
   var nm = el("span", "nm"); nm.textContent = name; nl.appendChild(nm);
   row.appendChild(lab); row.appendChild(pw); row.appendChild(nl);
-  var f = el("div", "fields");
+  var f = el("div", "fields3");
   [["q", "Qty", "Quantity for "], ["s", "Stock", "Current stock of "]].forEach(function(p){
     var l = el("label", "f");
     var t = el("span", "fl"); t.textContent = p[1];
@@ -761,6 +852,11 @@ function buildCard(id, name){
         autocomplete: "off", placeholder: "—", "aria-label": p[2] + name}));
     f.appendChild(l);
   });
+  var eb2 = el("label", "f est");
+  var el2 = el("span", "fl"); el2.textContent = "Est. price";
+  var ei = el("input", "eput", {type: "text", inputmode: "decimal", autocomplete: "off",
+              placeholder: "0.00", "aria-label": "Estimated price for " + name});
+  eb2.appendChild(el2); eb2.appendChild(ei); f.appendChild(eb2);
   wrap.appendChild(row); wrap.appendChild(f);
   return wrap;
 }
@@ -952,7 +1048,7 @@ $("#expand").addEventListener("click", function(){
 });
 $("#reset").addEventListener("click", function(){
   if(!confirm("Reset everything?\n\nThis clears every ticked item, every quantity, stock value and price, and the date, store and notes. Items you added and photos you replaced are kept. It cannot be undone.")) return;
-  S = { sel:{}, qty:{}, stk:{}, done:{}, collapsed:{}, photos:S.photos, price:{}, auto:{},
+  S = { sel:{}, qty:{}, stk:{}, done:{}, collapsed:{}, photos:S.photos, price:{}, est:S.est, auto:{},
         custom:S.custom, pics:S.pics, cur:S.cur,
         meta:{date:"",store:"",notes:""}, view:"edit" };
   saveNow();
@@ -1096,22 +1192,46 @@ function buildList(){
         + '<td class="pic"><img class="lthumb" src="' + photoFor(it.id) + '" alt=""></td>'
         + '<td class="nm2">' + esc(it.name) + '</td>'
         + '<td class="qty">' + esc(S.qty[it.id] || "") + '</td>'
-        + '<td class="stk">' + esc(S.stk[it.id] || "") + '</td></tr>';
+        + '<td class="stk">' + esc(S.stk[it.id] || "") + '</td>'
+        + '<td class="est">' + (estOf(it.id) ? esc(S.cur + " " + money(estOf(it.id) * qtyOf(it.id))) : "") + '</td></tr>';
     });
     if(!got) return;
-    rows += '<tr class="grouprow c-' + c.key + '"><th colspan="5" scope="colgroup">'
+    rows += '<tr class="grouprow c-' + c.key + '"><th colspan="6" scope="colgroup">'
       + esc(c.name) + '</th></tr>' + got;
   });
   body.innerHTML = rows
     ? '<table class="listtable"><thead><tr><th class="tick">Tick</th>'
       + '<th class="pic"><span class="sr">Photo</span></th><th>Item</th>'
-      + '<th class="qty">Quantity</th><th class="stk">Current Stock</th></tr></thead>'
+      + '<th class="qty">Quantity</th><th class="stk">Current Stock</th>'
+      + '<th class="est">Est. cost</th></tr></thead>'
       + '<tbody>' + rows + '</tbody></table>'
     : '<p class="empty">No items ticked yet. Go back and tick what you need.</p>';
+  var e = estimateTotal();
+  $("#estbar").hidden = !n;
+  $("#estsum").textContent = S.cur + " " + money(e.sum);
+  $("#estnote").textContent = e.unpriced
+    ? e.unpriced + (e.unpriced === 1 ? " item has no price yet" : " items have no price yet")
+    : "every item priced";
   $("#listsub").textContent = n === 0 ? "Nothing ticked yet."
     : n + (n === 1 ? " item" : " items") + " from your checklist.";
   $("#printfoot").textContent = n + (n === 1 ? " item" : " items") + " on this list.";
   return n;
+}
+function estOf(id){
+  var v = parseFloat(String(S.est[id] || "").replace(/[^0-9.\-]/g, ""));
+  return isFinite(v) && v > 0 ? v : 0;
+}
+function qtyOf(id){
+  var v = parseFloat(String(S.qty[id] || "").replace(/[^0-9.\-]/g, ""));
+  return isFinite(v) && v > 0 ? v : 1;
+}
+function estimateTotal(){
+  var sum = 0, priced = 0, unpriced = 0;
+  selectedIds().forEach(function(id){
+    var e = estOf(id);
+    if(e){ sum += e * qtyOf(id); priced++; } else unpriced++;
+  });
+  return {sum: sum, priced: priced, unpriced: unpriced};
 }
 function money(n){
   return (Math.round(n * 100) / 100).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -1119,6 +1239,17 @@ function money(n){
 function priceOf(id){
   var v = parseFloat(String(S.price[id] || "").replace(/[^0-9.\-]/g, ""));
   return isFinite(v) ? v : 0;
+}
+function paintBoughtBar(spent, n){
+  var eT = estimateTotal();
+  $("#bestbar").hidden = !n;
+  $("#bestsum").textContent = S.cur + " " + money(eT.sum);
+  var diff = spent - eT.sum;
+  var dEl = $("#bestdiff");
+  dEl.textContent = (diff >= 0 ? "+" : "\u2212") + " " + S.cur + " " + money(Math.abs(diff));
+  dEl.className = "val diff " + (diff > 0 ? "over" : "under");
+  $("#bestdifflab").textContent = diff > 0 ? "Over estimate"
+    : (diff < 0 ? "Under estimate" : "On estimate");
 }
 function buildBought(){
   var rows = "", n = 0, bought = 0, sum = 0;
@@ -1135,6 +1266,7 @@ function buildBought(){
         + '<td class="pic"><img class="lthumb" src="' + photoFor(it.id) + '" alt=""></td>'
         + '<td class="nm2">' + esc(it.name) + '</td>'
         + '<td class="qty">' + esc(S.qty[it.id] || "") + '</td>'
+        + '<td class="est">' + (estOf(it.id) ? esc(S.cur + " " + money(estOf(it.id) * qtyOf(it.id))) : "") + '</td>'
         + '<td class="price"><input class="pinput" type="text" inputmode="decimal" autocomplete="off"'
         + ' placeholder="0.00" aria-label="Price paid for ' + esc(it.name) + '"'
         + ' value="' + esc(S.price[it.id] || "") + '">'
@@ -1142,18 +1274,20 @@ function buildBought(){
         + '</span></td></tr>';
     });
     if(!got) return;
-    rows += '<tr class="grouprow c-' + c.key + '"><th colspan="5" scope="colgroup">'
+    rows += '<tr class="grouprow c-' + c.key + '"><th colspan="6" scope="colgroup">'
       + esc(c.name) + '</th></tr>' + got;
   });
   $("#boughtbody").innerHTML = rows
     ? '<table class="listtable"><thead><tr><th class="tick">Bought</th>'
       + '<th class="pic"><span class="sr">Photo</span></th><th>Item</th>'
-      + '<th class="qty">Quantity</th><th class="price">Price</th></tr></thead>'
+      + '<th class="qty">Quantity</th><th class="est">Estimated</th>'
+      + '<th class="price">Price</th></tr></thead>'
       + '<tbody>' + rows + '</tbody></table>'
     : '<p class="empty">Nothing on your list yet. Tick some items first.</p>';
   $("#totals").hidden = !n;
   $("#boughtcount").textContent = bought + " of " + n + (n === 1 ? " item bought" : " items bought");
   $("#boughtsum").textContent = S.cur + " " + money(sum);
+  paintBoughtBar(sum, n);
   $("#boughtsub").textContent = n
     ? "Tick things off as you buy them and note what you paid."
     : "Nothing on your list yet.";
@@ -1186,6 +1320,7 @@ $("#boughtbody").addEventListener("input", function(e){
   }); });
   $("#boughtcount").textContent = bought + " of " + n + (n === 1 ? " item bought" : " items bought");
   $("#boughtsum").textContent = S.cur + " " + money(sum);
+  paintBoughtBar(sum, n);
   document.body.classList.toggle("has-bought", bought > 0 || sum > 0);
   save();
 });
@@ -1572,6 +1707,7 @@ async function offerFile(name, blob){
 
 /* ---------- boot ---------- */
 load();
+seedEstimates();
 S.custom = S.custom.filter(function(c){ return c && c.id && c.key && c.name; });
 S.custom.forEach(function(c){ registerItem(c.key, c.id, c.name); });
 $("#mdate").value = S.meta.date; $("#mstore").value = S.meta.store; $("#mnotes").value = S.meta.notes;
