@@ -14,9 +14,10 @@ Three screens inside the one page:
 
 | Screen | Purpose |
 | --- | --- |
-| **Checklist** | 163 catalogue items in 15 categories. Tick, set quantity, stock and an estimated price. |
-| **Shopping List** | Only the ticked items, grouped by category. Printable / exportable. |
-| **What I Bought** | Tick things off as you buy them, enter what you paid, compare to the estimate. |
+| **Checklist** | 163 catalogue items in 15 categories. Tick, set quantity, stock, pack size and an estimated price. |
+| **Shopping List** | Only the ticked items, grouped by category. Printable / exportable, with a weight-to-carry total. |
+| **What I Bought** | Tick things off as you buy them, enter what you paid, compare to the estimate. Holds the **receipt reader**. |
+| **Previous Groceries** | Every finished trip, with its items, prices and receipt photo. Replayable and printable. |
 
 ---
 
@@ -98,6 +99,8 @@ JS       /* ---------- storage ---------- */          hydrate / load / save / sa
 | --- | --- |
 | `CATS` | The 163 catalogue items: `[{key, name, items:[{id, name}]}]`. Category order = display order. |
 | `SEED` | 85 starting prices: `{itemId: {p: 4.99, t: "LOTUSS TOMATO 600G"}}`. `t` is shown under the box so a price can be checked. |
+| `WT` | The pack size every one of the 163 items is normally sold in: `{itemId: "600 g"}`. Priced items got theirs by parsing `SEED[id].t`; the rest are typical Malaysian pack sizes. It is a **default**, shown as the Size box's placeholder — a value the user types lands in `S.wt` instead. |
+| `PAIRS` | English ⇄ Malay name pairs (`["garlic","bawang putih"]`) used to match a receipt line to a catalogue item in either language. |
 | `ORIG` | Each item's shipped photo (a data URL), captured at boot so a replaced photo can be restored. |
 | `BYID` / `CATOF` / `MINE` | Lookups: item id → name, → category key, → "the user added this one". |
 
@@ -116,10 +119,39 @@ inside each card's markup.
 | **Change a starting price** | Edit the entry in `SEED`. Only affects people who have not used the app before — existing users keep their own `est` values. |
 | **Change a category colour** | Edit the `.c-KEY{--cat:…}` rules (there are three sets: light, `prefers-color-scheme: dark`, and `[data-theme="dark"]`). Change all three. |
 | **Change the print layout** | The `@media print` block only. |
-| **Change the PDF** | `makePdf()` — it writes PDF bytes by hand. Coordinates are in points, origin bottom-left. |
-| **Add a state field** | Add it to the `S` literal **and** to the `fresh` literal inside `hydrate()`, **and** to the key list `hydrate()` copies. Missing the `fresh` literal is a real bug that has happened — it breaks the app for anyone with a saved list. |
+| **Change the PDF** | `makePdf(opt)` — it writes PDF bytes by hand. Coordinates are in points, origin bottom-left. `opt.trips` picks which past trips to append, `opt.only` leaves the current list out, `opt.name` sets the file name. |
+| **Change a default pack size** | Edit the entry in `WT`. It only changes the placeholder, so anyone who typed their own size keeps it. |
+| **Change the PDF columns** | The right-hand edges `rLast` / `rEst` / `rQty` / `rSize` near the top of `makePdf()`, plus `tableHead()`. All four are shared by the list, bought and past-trip tables. |
+| **Teach the receipt reader a word** | Add a pair to `PAIRS`. Add a junk line to `RCSKIP`. Both live in the receipt section. |
+| **Add a state field** | Add it to the `S` literal **and** to the `fresh` literal inside `hydrate()`, **and** to the key list `hydrate()` copies. Missing the `fresh` literal is a real bug that has happened — it breaks the app for anyone with a saved list. Fields that are not plain id→value maps (`trips`, `receipt`, `pdfhist`) need their own validation line in `hydrate()` as well. |
 
 ---
+
+## 5b. The three things added on 26 Aug 2026
+
+**Pack size.** Every card has a fourth box, `Size`. `sizeOf(id)` returns the user's value or the
+`WT` default; `parseSize()` turns `"4x139 g"` into grams and millilitres so `weightTotal()` can
+add up what the trolley weighs. Sizes travel into the list table, the printout, the PDF and every
+saved trip.
+
+**The receipt reader** (`What I bought` → Receipt). Two inputs, both optional:
+
+- a **photo**, shrunk to 1400px / quality 0.62 by `shrinkImage()` and kept in `S.receipt.img`;
+- **text**, which the phone itself reads off the photo (iOS Live Text, Android Lens) and the user
+  pastes in. There is no OCR in this file and there must not be — it would mean a multi-megabyte
+  library and a network fetch, and §8 forbids both.
+
+`parseReceipt()` turns that text into `{name, price}` lines (it handles a name whose price sits on
+the next line, `1 X 4.99` quantity lines, barcodes, tax letters and the totals block).
+`bestMatch()` scores each line against the ticked items only, through `rnorm()` → `rtokens()` →
+`tokScore()`, and the user confirms or corrects every row before `#rcapply` writes the prices.
+Two receipt lines pointing at one item are added together.
+
+**Previous Groceries.** `tripFromNow()` freezes the current trip — names, sizes, quantities,
+estimates, prices, receipt — into `S.trips[0]`. Nothing in a saved trip is looked up live, so a
+renamed or deleted item cannot rewrite history. `MAXTRIPS` (40) caps how many are kept,
+`KEEPSHOTS` (12) caps how many keep their photo, and `fitTrips()` drops photos then whole trips
+if `localStorage` refuses the write. `MAXHISTPDF` (12) caps how many reach a PDF.
 
 ## 6. Testing
 
@@ -141,6 +173,9 @@ Deeper checks (each needs Google Chrome, and `python3 -m pip install --user pypd
 | `python3 esttest.py` | Estimated-spend maths and estimate-vs-actual |
 | `python3 backuptest.py` | Backup on one browser, restore into a clean one |
 | `python3 phone.py` | Renders the page at 375 px and checks for horizontal overflow |
+| `python3 newtest.py` | Pack sizes, the receipt reader end to end, saving and replaying a trip, and the PDF that comes out |
+| `python3 overflow.py` | All four views at a true 375 px — headless Chrome will not size a window below 500 px, so it runs the page inside an iframe |
+| `python3 stresstest.py` | 163 items and three saved trips through the PDF: 20 pages, none blank |
 
 ---
 
@@ -200,6 +235,17 @@ These are the things that will actually bite you.
 - **The PDF is independent of the print CSS.** `makePdf()` writes PDF operators with its own A4
   geometry. Changing `@media print` does *not* change the PDF, and vice versa. Change both or
   neither.
+- **The tables are seven columns wide now**, which does not fit a phone. On screens under 560px
+  they carry a `min-width` and scroll sideways inside `#listbody` / `#boughtbody` / `.ttable`.
+  Without it the item name collapses to one letter per line. The print block resets `min-width`
+  to 0 so paper never inherits it.
+- **`.pbox` is print-only on screen** — except inside `.trip`, where a past trip needs a visible
+  tick. That rule is more specific than the print one, so the print block has to name
+  `.trip .pbox` too. It does. Keep it that way.
+- **A closed `<details>` prints nothing.** `beforeprint` opens every trip before the history view
+  goes to paper.
+- **`body.printhist`** decides whether Print sends the shopping list or the trip history. The view
+  switchers add and remove it; do not set it anywhere else.
 - **`paintItem()` will not overwrite the estimate box while it has focus.** Keep that guard, or
   typing a price gets wiped on every keystroke.
 - **What survives what:**
@@ -227,8 +273,14 @@ Three real bugs, found by re-reading the file rather than trusting memory:
 
 - **No sync.** State lives in that browser's `localStorage`, per device *and per address* — the
   hosted page and the downloaded file keep separate lists. Backup / Restore moves it deliberately.
-- **No history.** "What I Bought" holds the current trip only. Starting a new list replaces it.
-  Keeping past trips would need a new state shape.
+- **Past trips live in that browser only**, like everything else here. A backup file carries them;
+  nothing syncs on its own. Receipt photos are the one heavy thing in storage, which is why only
+  the twelve most recent trips keep theirs.
+- **The receipt reader depends on the phone's own text recognition.** If the paste is empty or
+  garbled, every price can still be typed in by hand. It only ever matches against items already
+  on the list, and it never fills a price in without the user ticking the row.
+- **Pack sizes are typical, not measured.** 85 came from the Lotus's product names, the other 78
+  are the usual size that item is sold in. Every one is editable.
 - **Seed prices are a snapshot** taken from Lotus's on 24 Aug 2026, one store, and they drift.
   78 items were deliberately left unpriced because the automated match was not trustworthy.
 - **The site is public.** Anyone with the link can open it.

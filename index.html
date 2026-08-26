@@ -346,6 +346,105 @@ th.price,td.price{width:110px;text-align:right}
 .eput.seeded{border-style:dashed}
 .srcnote{font-size:10.5px;color:var(--muted);line-height:1.25;overflow-wrap:anywhere}
 .fields3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.fields4{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.wput{
+  width:100%;padding:9px 10px;border:1px solid var(--line2);border-radius:var(--r-sm);
+  background:var(--surface);font-family:var(--f-mono);font-size:13.5px;
+}
+.wput:hover{border-color:var(--muted)}
+.item.on .wput{border-color:var(--accent-line)}
+th.sz,td.sz{
+  width:92px;text-align:right;font-family:var(--f-mono);font-size:13px;
+  color:var(--muted);white-space:nowrap
+}
+
+/* ---------- the receipt ---------- */
+.receipt{
+  border:1px solid var(--line);border-radius:var(--r-sm);background:var(--surface2);
+  padding:16px;margin:0 0 18px;
+}
+.rctop h3{font-family:var(--f-disp);font-size:17px;font-weight:600;margin:0 0 3px}
+.rctop p{margin:0 0 14px;color:var(--muted);font-size:13.5px;max-width:64ch}
+.rcgrid{display:grid;grid-template-columns:minmax(150px,215px) 1fr;gap:18px;align-items:start}
+.rcshot img{
+  display:block;width:100%;max-height:230px;object-fit:contain;object-position:top;
+  border:1px solid var(--line);border-radius:var(--r-sm);background:#fff;cursor:zoom-in
+}
+.rcnone{margin:0;padding:26px 10px;text-align:center;color:var(--muted);font-size:13px;
+  border:1px dashed var(--line2);border-radius:var(--r-sm)}
+.rcbtns{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.rcread .fl{display:block;margin-bottom:4px}
+#rctext{
+  width:100%;padding:10px 12px;border:1px solid var(--line2);border-radius:var(--r-sm);
+  background:var(--surface);font-size:14px;font-family:var(--f-mono);resize:vertical;min-height:96px
+}
+.rchow{margin:9px 0 0;font-size:13px;color:var(--muted)}
+.rchow summary{cursor:pointer;color:var(--accent);font-weight:500}
+.rchow p{margin:8px 0 0;line-height:1.5;max-width:62ch}
+#rcmatch{margin-top:18px;border-top:1px solid var(--line);padding-top:14px}
+#rcmatch h4{font-family:var(--f-disp);font-size:15px;font-weight:600;margin:0 0 3px}
+.rcnote{margin:0 0 12px;font-size:13px;color:var(--muted);max-width:64ch}
+.rctable{overflow-x:auto;-webkit-overflow-scrolling:touch}
+td.rcline{font-family:var(--f-mono);font-size:12.5px;overflow-wrap:anywhere}
+td.rcpick{min-width:180px}
+.rcsel{
+  width:100%;max-width:230px;padding:7px 8px;border:1px solid var(--line2);
+  border-radius:var(--r-sm);background:var(--surface);font-size:13.5px
+}
+.rcsure{display:block;font-size:11px;margin-top:3px;letter-spacing:.04em;text-transform:uppercase;font-weight:700}
+.rcsure.yes{color:var(--accent)}
+.rcsure.mid{color:var(--muted)}
+.rcsure.no{color:var(--danger)}
+.rcprice{
+  width:100%;max-width:96px;padding:7px 9px;border:1px solid var(--line2);border-radius:var(--r-sm);
+  background:var(--surface);font-family:var(--f-mono);font-size:13.5px;text-align:right
+}
+.rcuse{width:20px;height:20px;accent-color:var(--accent);cursor:pointer}
+
+/* ---------- previous groceries ---------- */
+.trip{border:1px solid var(--line);border-radius:var(--r-sm);background:var(--surface2);margin:0 0 10px}
+.trip>summary{
+  cursor:pointer;padding:13px 14px;display:flex;gap:12px;align-items:baseline;flex-wrap:wrap;
+  font-size:14.5px;list-style:none
+}
+.trip>summary::-webkit-details-marker{display:none}
+.trip>summary::before{
+  content:"";flex:none;width:7px;height:7px;border-right:2px solid var(--muted);
+  border-bottom:2px solid var(--muted);transform:rotate(-45deg);transition:transform .15s;margin-right:2px
+}
+.trip[open]>summary::before{transform:rotate(45deg)}
+.trip .tdate{font-weight:600;flex:1 1 auto;min-width:0}
+.trip .tcount{color:var(--muted);font-size:13px}
+.trip .tspend{font-family:var(--f-mono);font-weight:600;font-variant-numeric:tabular-nums}
+.trip .tbody{padding:0 14px 14px;border-top:1px solid var(--line)}
+.trip .tnotes{margin:12px 0 0;font-size:13.5px;color:var(--ink2)}
+.trip .tmeta{margin:10px 0 0;font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.rcthumb{
+  display:block;margin:12px 0 0;padding:0;border:1px solid var(--line);border-radius:var(--r-sm);
+  background:#fff;cursor:zoom-in;max-width:190px;overflow:hidden
+}
+.rcthumb img{display:block;width:100%;max-height:150px;object-fit:cover;object-position:top}
+.ttable{margin-top:12px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.trip .pbox{
+  display:inline-block;width:16px;height:16px;border:1.5px solid var(--line2);border-radius:4px;
+  background:var(--surface);position:relative;vertical-align:-3px
+}
+.trip .pbox.ticked{background:var(--accent);border-color:var(--accent)}
+.trip .pbox.ticked::after{
+  content:"";position:absolute;left:4.6px;top:1.4px;width:4px;height:8px;
+  border:solid #fff;border-width:0 2px 2px 0;transform:rotate(42deg)
+}
+.trip tr.notbought td{color:var(--muted)}
+.tacts{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.shotov{
+  position:fixed;inset:0;z-index:90;background:rgba(0,0,0,.88);display:grid;place-items:center;
+  padding:22px;cursor:zoom-out
+}
+.shotov img{max-width:100%;max-height:100%;object-fit:contain;border-radius:6px;background:#fff}
+.shotclose{
+  position:absolute;top:14px;right:16px;width:38px;height:38px;border-radius:50%;border:0;
+  background:rgba(255,255,255,.9);color:#111;font-size:24px;line-height:1;cursor:pointer
+}
 .tally .est-line{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
 .tally .est-line b{font-family:var(--f-mono);font-weight:600;color:var(--ink2)}
 .estbar{
@@ -409,6 +508,18 @@ tr.done td.nm2{text-decoration:line-through;color:var(--muted)}
   .fields3{grid-template-columns:1fr 1fr}
   .estfield{grid-column:1/-1}
   th.est,td.est{width:70px}
+  th.sz,td.sz{width:66px;font-size:12px}
+  #listbody .listtable{min-width:496px}
+  #boughtbody .listtable{min-width:520px}
+  .ttable .listtable{min-width:404px}
+  td.nm2{min-width:104px}
+  .rcgrid{grid-template-columns:1fr;gap:14px}
+  .rcshot img{max-height:190px}
+  .receipt{padding:13px 12px}
+  .trip>summary{padding:11px 12px;gap:8px;font-size:13.5px}
+  .trip .tbody{padding:0 12px 12px}
+  td.rcpick{min-width:150px}
+  .tacts .btn{flex:1 1 45%;text-align:center}
   .listactions{gap:8px}
   .listactions .btn{flex:1 1 45%;text-align:center}
   .meta{gap:10px}
@@ -466,14 +577,15 @@ tr.done td.nm2{text-decoration:line-through;color:var(--muted)}
   tbody td{padding:.75mm 1.5mm;border-bottom:.3pt solid #c8c8c8;color:#000}
   tr.done td.nm2{text-decoration:none;color:#000}
   .dcb,.bcb{display:none !important}
-  .pbox{
+  .pbox,.trip .pbox{
     display:inline-block;width:3.4mm;height:3.4mm;border:.7pt solid #000;
     border-radius:.5mm;background:#fff;vertical-align:-.3mm;position:relative
   }
-  .pbox.ticked::after{
+  .pbox.ticked::after,.trip .pbox.ticked::after{
     content:"";position:absolute;left:1.1mm;top:.25mm;width:1mm;height:2.1mm;
     border:solid #000;border-width:0 .8pt .8pt 0;transform:rotate(42deg)
   }
+  .trip .pbox.ticked{background:#fff;border-color:#000}
   th.tick,td.tick{width:11mm}
   th.qty,td.qty{width:22mm}
   th.stk,td.stk{width:26mm}
@@ -492,7 +604,30 @@ tr.done td.nm2{text-decoration:line-through;color:var(--muted)}
   .estbar{display:flex !important;gap:6mm;border:0;background:#fff;padding:0;margin:0 0 2mm}
   .estbar .lab{font-size:7.5pt;color:#000}
   .estbar .val{font-size:10pt}
-  .srcnote,.estfield{display:none !important}
+  .srcnote,.estfield,.receipt{display:none !important}
+  #listbody .listtable,#boughtbody .listtable,.ttable .listtable,td.nm2{min-width:0}
+  th.sz,td.sz{width:20mm;color:#000}
+  #histview{display:none !important}
+  body.printhist #listview,body.printhist #boughtview{display:none !important;break-before:auto}
+  body.printhist #histview{
+    display:block !important;break-before:auto;margin:0;padding:0;border:0;box-shadow:none;background:#fff
+  }
+  body.printhist .trip{
+    border:0;background:#fff;margin:0 0 6mm;break-inside:auto;page-break-inside:auto
+  }
+  body.printhist .trip + .trip{break-before:page;page-break-before:always}
+  body.printhist .trip>summary{
+    list-style:none;padding:0 0 1mm;font-size:11.5pt;border-bottom:1pt solid #000;margin:0 0 1.5mm;
+    break-after:avoid;page-break-after:avoid
+  }
+  body.printhist .trip>summary::before{display:none}
+  body.printhist .trip .tbody{border:0;padding:0}
+  body.printhist .tacts{display:none !important}
+  body.printhist .rcthumb{
+    max-width:62mm;border:.3pt solid #999;margin:3mm 0 0;break-inside:avoid;page-break-inside:avoid
+  }
+  body.printhist .rcthumb img{max-height:none}
+  body.printhist .trip .tmeta,body.printhist .trip .tnotes{color:#000;font-size:9pt}
   .totals{border-top:1pt solid #000;margin-top:2mm;padding-top:1.5mm}
   .totals .cnt{font-size:9pt;color:#000}
   .totals .sum{font-size:12pt}
@@ -545,15 +680,19 @@ tr.done td.nm2{text-decoration:line-through;color:var(--muted)}
     <div class="opts">
       <label class="chk"><input type="checkbox" id="withpics" checked>
         Show photos in the list, printout and PDF</label>
+      <label class="chk" id="wrap-pdfhist" hidden><input type="checkbox" id="withhist" checked>
+        Add my previous trips to the PDF</label>
     </div>
     <div class="estbar" id="estbar" hidden>
       <span><span class="lab">Estimated spend</span><br><span class="val" id="estsum"></span></span>
+      <span><span class="lab">Weight to carry</span><br><span class="val" id="estwt" style="font-size:15px"></span></span>
       <span><span class="lab">Coverage</span><br><span class="val" id="estnote" style="font-size:13px"></span></span>
     </div>
     <div id="listbody"></div>
     <div class="listactions">
       <button type="button" class="btn" id="backedit">Edit selection</button>
       <button type="button" class="btn" id="tobought">What I bought</button>
+      <button type="button" class="btn" id="tohist">Previous groceries</button>
       <button type="button" class="btn btn-primary js-pdf">Download PDF</button>
       <button type="button" class="btn js-print">Print</button>
       <button type="button" class="btn" id="clrdone">Clear completed items</button>
@@ -577,6 +716,42 @@ tr.done td.nm2{text-decoration:line-through;color:var(--muted)}
       <span><span class="lab">Estimated</span><br><span class="val" id="bestsum"></span></span>
       <span><span class="lab" id="bestdifflab">Difference</span><br><span class="val diff" id="bestdiff"></span></span>
     </div>
+
+    <section class="receipt" id="receipt" aria-labelledby="rctitle">
+      <div class="rctop">
+        <h3 id="rctitle">Receipt</h3>
+        <p>Snap the receipt, paste the text your phone reads off it, and the prices drop into the
+          list below on their own.</p>
+      </div>
+      <div class="rcgrid">
+        <div class="rcshot">
+          <img id="rcimg" alt="The receipt for this trip" hidden>
+          <p class="rcnone" id="rcnone">No receipt photo yet.</p>
+          <div class="rcbtns">
+            <button type="button" class="btn" id="rcadd">Add receipt photo</button>
+            <button type="button" class="btn btn-ghost" id="rcdel" hidden>Remove photo</button>
+          </div>
+        </div>
+        <div class="rcread">
+          <label class="fl" for="rctext">Receipt text</label>
+          <textarea id="rctext" rows="5" placeholder="Paste the receipt text here…"></textarea>
+          <details class="rchow">
+            <summary>How do I get the text off the photo?</summary>
+            <p><b>iPhone</b> — open the receipt in Photos, tap the <b>text</b> button in the bottom-right
+              corner, tap <b>Select All</b>, then <b>Copy</b>. Come back here and paste.</p>
+            <p><b>Android</b> — open the receipt in Google Photos, tap <b>Lens</b>, tap
+              <b>Copy text</b>, then paste.</p>
+            <p>Nothing leaves your phone, and you can always type the prices in by hand instead.</p>
+          </details>
+          <div class="rcbtns">
+            <button type="button" class="btn btn-primary" id="rcscan">Read the prices</button>
+            <button type="button" class="btn btn-ghost" id="rcclear">Clear text</button>
+          </div>
+        </div>
+      </div>
+      <div id="rcmatch" hidden></div>
+    </section>
+
     <div id="boughtbody"></div>
     <div class="totals" id="totals" hidden>
       <span class="cnt" id="boughtcount"></span>
@@ -584,7 +759,28 @@ tr.done td.nm2{text-decoration:line-through;color:var(--muted)}
     </div>
     <div class="listactions">
       <button type="button" class="btn" id="tolist">Back to shopping list</button>
-      <button type="button" class="btn btn-primary js-pdf">Download PDF</button>
+      <button type="button" class="btn btn-primary" id="savetrip">Finish trip &amp; save it</button>
+      <button type="button" class="btn js-pdf">Download PDF</button>
+      <button type="button" class="btn js-print">Print</button>
+      <button type="button" class="btn" id="tohist2">Previous groceries</button>
+    </div>
+    <p class="note js-sandboxnote" hidden></p>
+  </section>
+
+  <section class="sheet" id="histview" hidden aria-labelledby="httitle">
+    <div class="print-head">
+      <h2 id="httitle">Previous Groceries</h2>
+      <p class="sub" id="histsub">Every trip you finished, and what it actually cost.</p>
+    </div>
+    <div class="estbar" id="histbar" hidden>
+      <span><span class="lab">Trips saved</span><br><span class="val" id="histn"></span></span>
+      <span><span class="lab">Spent altogether</span><br><span class="val" id="histsum"></span></span>
+      <span><span class="lab">Average trip</span><br><span class="val" id="histavg"></span></span>
+    </div>
+    <div id="histbody"></div>
+    <div class="listactions">
+      <button type="button" class="btn" id="histback">Back to shopping list</button>
+      <button type="button" class="btn btn-primary js-histpdf">Download all as PDF</button>
       <button type="button" class="btn js-print">Print</button>
     </div>
     <p class="note js-sandboxnote" hidden></p>
@@ -600,6 +796,7 @@ tr.done td.nm2{text-decoration:line-through;color:var(--muted)}
 
 <input type="file" id="photofile" accept="image/*" hidden>
 <input type="file" id="backupfile" accept="application/json,.json" hidden>
+<input type="file" id="rcfile" accept="image/*" capture="environment" hidden>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
@@ -610,22 +807,34 @@ var KEY = "dapurRun.v1";
 var BYID = {}, CATOF = {}, MINE = {};
 CATS.forEach(function(c){ c.items.forEach(function(i){ BYID[i.id] = i.name; CATOF[i.id] = c.key; }); });
 
-var S = { sel:{}, qty:{}, stk:{}, done:{}, collapsed:{}, photos:{}, price:{}, est:{}, auto:{},
-          custom:[], pics:true, seeded:0, cur:"RM", meta:{date:"",store:"",notes:""}, view:"edit" };
+var S = { sel:{}, qty:{}, stk:{}, done:{}, collapsed:{}, photos:{}, price:{}, est:{}, auto:{}, wt:{},
+          custom:[], trips:[], receipt:null, pics:true, pdfhist:true, seeded:0, cur:"RM",
+          meta:{date:"",store:"",notes:""}, view:"edit" };
 /* typical Lotus's shelf prices, looked up 24 Aug 2026 — a starting point you can edit */
 var SEED = {"vegetables-fresh-cooking-ingredients-bawang-putih":{"p":4.99,"t":"BAWANG PUTIH -500G (PURE WHITE)"},"vegetables-fresh-cooking-ingredients-carrot":{"p":4.99,"t":"LOBAK MERAH AUST/AUST CARROTS 1KG -PKT"},"vegetables-fresh-cooking-ingredients-tomato":{"p":4.69,"t":"LOTUSS TOMATO 600G"},"vegetables-fresh-cooking-ingredients-cili-hijau":{"p":9.89,"t":"CILI HIJAU - KG (3551)"},"vegetables-fresh-cooking-ingredients-lengkuas":{"p":6.89,"t":"LENGKUAS - KG (3082)"},"vegetables-fresh-cooking-ingredients-daun-sup":{"p":3.99,"t":"DAUN SADERI CHINA IKAT/CHINA CELERY-BDL"},"vegetables-fresh-cooking-ingredients-daun-ketumbar":{"p":3.69,"t":"DAUN KETUMBAR 250G"},"vegetables-fresh-cooking-ingredients-limau-kasturi":{"p":2.49,"t":"LIMAU KASTURI 500G"},"vegetables-fresh-cooking-ingredients-sawi":{"p":4.89,"t":"SAWI CAMERON 1KG-PEK"},"vegetables-fresh-cooking-ingredients-brokoli":{"p":1.99,"t":"BROKOLI CHINA/CHINA BROCCOLI-PCS (2046)"},"vegetables-fresh-cooking-ingredients-kacang-panjang":{"p":1.79,"t":"KACANG PANJANG / LONG BEANS 250G"},"vegetables-fresh-cooking-ingredients-bendi":{"p":2.59,"t":"LOTUSS BENDI 250G"},"vegetables-fresh-cooking-ingredients-jagung":{"p":4.89,"t":"LOTUSS JAGUNG MANIS BIO CAMERON"},"vegetables-fresh-cooking-ingredients-salad-lettuce":{"p":6.49,"t":"LOTUSS SALAD CAMPURAN KLASIK 230G"},"vegetables-fresh-cooking-ingredients-kacang-buncis":{"p":3.59,"t":"LOTUSS KACANG BUNCIS 250G"},"chicken-meat-fish-seafood-ikan-siakap":{"p":10.79,"t":"IKAN SIAKAP L (PCS) (8790)"},"chicken-meat-fish-seafood-ikan-selar":{"p":7.85,"t":"CENCARU L (KG) (9007)"},"frozen-food-sausage":{"p":6.15,"t":"AYAMAS CHICKEN FRANKFURTER 340G"},"rice-noodles-pasta-dry-food-beras":{"p":27.9,"t":"BAHAGIA BERAS THAI IMPORT 10KG"},"rice-noodles-pasta-dry-food-mi-sedap":{"p":5.85,"t":"MI SEDAAP GORENG ASLI JUMBO 4X139G"},"rice-noodles-pasta-dry-food-maggi-kari":{"p":6.35,"t":"MAGGI 2-MINN BIG CURRY 5X106G"},"rice-noodles-pasta-dry-food-spaghetti":{"p":4.49,"t":"PREGO SPAGHETTI 500G"},"rice-noodles-pasta-dry-food-roti-bread":{"p":4.3,"t":"GARDENIA ORIGINAL CLASSIC JUMBO (600G)"},"rice-noodles-pasta-dry-food-tepung-gandum":{"p":3.4,"t":"FAIZA TEPUNG GANDUM 1KG"},"rice-noodles-pasta-dry-food-tepung-jagung":{"p":1.7,"t":"STAR TEPUNG JAGUNG 400G"},"rice-noodles-pasta-dry-food-tepung-goreng-ayam-seasoned-flour":{"p":2.6,"t":"SERI AJI TEPUNG GORENG PEDAS 150G"},"cooking-sauces-seasoning-spices-gula-putih":{"p":2.7,"t":"PRAI CASTER SUGAR 500G"},"cooking-sauces-seasoning-spices-gula-perang":{"p":4.8,"t":"CSR NATURAL BROWN SUGAR 1KG"},"cooking-sauces-seasoning-spices-kicap-manis":{"p":5.55,"t":"MAHSURI KICAP MANIS PEDAS 410ML"},"cooking-sauces-seasoning-spices-kicap-masin":{"p":4.6,"t":"ADABI KICAP MASIN 340ML"},"cooking-sauces-seasoning-spices-sos-tiram":{"p":8.49,"t":"ADABI SOS TIRAM 510ML"},"cooking-sauces-seasoning-spices-mayonnaise":{"p":7.99,"t":"LOTUSS REAL MAYONNAISE 470ML"},"cooking-sauces-seasoning-spices-cuka":{"p":3.89,"t":"YAKIN CUKA BUATAN 640ML"},"cooking-sauces-seasoning-spices-serbuk-kari-ayam-daging":{"p":6.65,"t":"FAIZA KARI DAGING 220G"},"cooking-sauces-seasoning-spices-serbuk-kari-ikan":{"p":6.65,"t":"FAIZA KARI IKAN 220G"},"cooking-sauces-seasoning-spices-serbuk-cili":{"p":5.39,"t":"FAIZA SERBUK CILI 125G"},"cooking-sauces-seasoning-spices-cukup-rasa-seasoning":{"p":5.99,"t":"MAGGI CUKUP RASA AIO SEAS 300G"},"cooking-sauces-seasoning-spices-asam-jawa":{"p":4.45,"t":"ADABI ASAM JAWA XTRA 200G"},"cooking-sauces-seasoning-spices-santan":{"p":3.65,"t":"MS SANTAN 200ML"},"cooking-sauces-seasoning-spices-rempah-kurma":{"p":4.75,"t":"ADABI REMPAH KURMA 100G"},"cooking-sauces-seasoning-spices-sos-pasta-bolognese":{"p":7.5,"t":"PREGO TRADITIONAL PASTA SAUCE 350G"},"cooking-sauces-seasoning-spices-sos-carbonara":{"p":9.15,"t":"PREGO CARBONARA MUSHROOM 350G"},"dairy-chilled-breakfast-susu-fresh-milk":{"p":16.7,"t":"FARM FRESH MILK 2L"},"dairy-chilled-breakfast-butter":{"p":13.29,"t":"ANCHOR PURE NEW ZEALAND BUTTER 227G"},"dairy-chilled-breakfast-margarine":{"p":10.99,"t":"NATUREL SOFT MARGARINE 500G"},"dairy-chilled-breakfast-coffee":{"p":4.65,"t":"KAPAL API KOPI CAMPURAN HALUS 158G"},"baby-groceries-baby-vegetables-carrot":{"p":4.99,"t":"LOBAK MERAH AUST/AUST CARROTS 1KG -PKT"},"baby-groceries-baby-vegetables-broccoli":{"p":1.99,"t":"BROKOLI CHINA/CHINA BROCCOLI-PCS (2046)"},"baby-groceries-baby-vegetables-pumpkin-labu":{"p":2.89,"t":"LABU MANIS / GOLDEN PUMPKIN - KG (3542)"},"baby-groceries-baby-vegetables-sweet-potato-keledek":{"p":4.99,"t":"UBI KELEDEK MADU 500G/HONEY SWEET POTATO 500G"},"baby-groceries-baby-vegetables-tomato":{"p":4.69,"t":"LOTUSS TOMATO 600G"},"baby-groceries-baby-vegetables-jagung":{"p":4.89,"t":"LOTUSS JAGUNG MANIS BIO CAMERON"},"baby-groceries-baby-protein-siakap":{"p":10.79,"t":"IKAN SIAKAP L (PCS) (8790)"},"baby-groceries-baby-fruits-banana":{"p":6.99,"t":"PISANG BERANGAN-KG(2406)"},"baby-groceries-baby-fruits-apple":{"p":11.99,"t":"LOTUSS EPAL GRANNY SMITH 10S"},"baby-groceries-baby-fruits-pear":{"p":8.99,"t":"CENTURY PEAR 4S"},"baby-groceries-baby-fruits-avocado":{"p":5.99,"t":"AVOKADO - BIJI (2881)"},"baby-groceries-baby-fruits-papaya":{"p":6.99,"t":"LOTUSS BETIK SEKAKI - KG(2389)"},"baby-groceries-baby-fruits-mango":{"p":6.99,"t":"MANGGA FARLAN THAI-KG(2884)"},"baby-groceries-baby-carbs-staples-baby-oats":{"p":10.65,"t":"QUAKER INSTANT OATMEAL 1KG FOIL"},"baby-groceries-baby-dairy-snacks-baby-yogurt":{"p":1.45,"t":"FERNLEAF LOW FAT YOGURT NATURAL 110G"},"baby-groceries-baby-dairy-snacks-cheese":{"p":11.75,"t":"CHESDALE CHEESE PLAIN 12S 250G"},"baby-groceries-baby-dairy-snacks-unsalted-butter":{"p":12.4,"t":"SCS PORTION UNSALTED BUTTER 10GX12"},"baby-groceries-baby-dairy-snacks-baby-puffs":{"p":11.9,"t":"GNUBKINS ORG S.BERRY PUFFS W.STRFISH 32G"},"canned-jarred-packaged-food-sardine":{"p":4.95,"t":"AYAM BRAND SARDINES IN TMT SAUCE 155G"},"canned-jarred-packaged-food-tuna":{"p":5.99,"t":"LOTUSS TUNA FLAKES IN OLIVE 150G"},"canned-jarred-packaged-food-baked-beans":{"p":3.2,"t":"BUMBLE BEE BAKED BEANS 425G"},"household-cleaning-laundry-detergent":{"p":11.49,"t":"VALUE LIQUID DETERGENT 4KG"},"household-cleaning-floor-cleaner":{"p":4.99,"t":"VALUE FLOOR CLEANER 1.8L"},"household-cleaning-garbage-bags":{"p":2.99,"t":"LOTUSS BLUE HDPE GARBAGE BAG S30S"},"household-cleaning-kitchen-tissue":{"p":12.9,"t":"VINDA DELUXE KITCHEN TOWEL 6X80S"},"household-cleaning-wet-wipes":{"p":9.9,"t":"TEMPO PROTECT MINI WET WIPES 6X8S"},"household-cleaning-insect-spray":{"p":7.5,"t":"SHIELDTOX AE ATTACK AEROSOL 270ML"},"household-cleaning-hand-wash-hand-soap":{"p":3.99,"t":"ALIV HAND WASH POUCH 400ML COASTAL WATER"},"personal-care-toiletries-shampoo":{"p":7.5,"t":"ALIV HAIR SHAMPOO 750ML ARGAN OIL"},"personal-care-toiletries-conditioner":{"p":7.5,"t":"ALIV HAIR CONDITIONER 750ML"},"personal-care-toiletries-toothpaste":{"p":5.29,"t":"VALUE TOOTHPASTE 200GX2"},"personal-care-toiletries-face-moisturiser":{"p":10.95,"t":"SAFI PELEMBAP MUKA GAMAT 50G"},"personal-care-toiletries-deodorant":{"p":15.99,"t":"REXONA (W) DEO RO VIBRANT SAKURA 2X45ML"},"personal-care-toiletries-cotton-buds":{"p":3.29,"t":"PREMIER COTTON BUDS 4X160 TIPS"},"personal-care-toiletries-pantyliner":{"p":12.9,"t":"INTIMATE LONG+WIDER PANTYLINERS 60S"},"personal-care-toiletries-hair-oil-serum":{"p":24.89,"t":"GVC HAIR SERUM MULTIPLE REPAIR 100ML"},"baby-care-essentials-baby-wet-wipes":{"p":6.99,"t":"CUTE+CARE BABY WIPES FRAG FREE 80SX2"},"baby-care-essentials-baby-body-wash":{"p":28.9,"t":"JOHNSONS BABY BATH MILK + RICE 1L"},"baby-care-essentials-baby-hand-mouth-wipes":{"p":6.99,"t":"CUTE+CARE BABY WIPES FRAG FREE 80SX2"}};
+/* the usual pack size each item is sold in — a starting point, editable per item.
+   Sizes for priced items come straight out of the SEED product description. */
+var WT = {"baby-care-essentials-baby-body-wash":"1 L","baby-care-essentials-baby-bottle-cleanser":"500 ml","baby-care-essentials-baby-diapers":"60 pcs","baby-care-essentials-baby-food-storage-bags-containers":"30 pcs","baby-care-essentials-baby-hand-mouth-wipes":"160 pcs","baby-care-essentials-baby-laundry-detergent":"1 L","baby-care-essentials-baby-tissues":"100 pcs","baby-care-essentials-baby-wet-wipes":"160 pcs","baby-care-essentials-bottle-brush":"1 pcs","baby-groceries-baby-carbs-staples-baby-oats":"1 kg","baby-groceries-baby-carbs-staples-baby-pasta":"250 g","baby-groceries-baby-carbs-staples-baby-rice-beras":"1 kg","baby-groceries-baby-dairy-snacks-baby-food-pouch-puree":"110 g","baby-groceries-baby-dairy-snacks-baby-puffs":"32 g","baby-groceries-baby-dairy-snacks-baby-yogurt":"110 g","baby-groceries-baby-dairy-snacks-cheese":"250 g","baby-groceries-baby-dairy-snacks-unsalted-butter":"12×10 g","baby-groceries-baby-fruits-apple":"10 pcs","baby-groceries-baby-fruits-avocado":"1 pcs","baby-groceries-baby-fruits-banana":"1 kg","baby-groceries-baby-fruits-blueberry":"125 g","baby-groceries-baby-fruits-dragon-fruit":"500 g","baby-groceries-baby-fruits-mango":"1 kg","baby-groceries-baby-fruits-papaya":"1 kg","baby-groceries-baby-fruits-pear":"4 pcs","baby-groceries-baby-fruits-strawberry":"250 g","baby-groceries-baby-protein-beef":"500 g","baby-groceries-baby-protein-chicken":"500 g","baby-groceries-baby-protein-salmon":"200 g","baby-groceries-baby-protein-siakap":"1 pcs","baby-groceries-baby-vegetables-bayam":"250 g","baby-groceries-baby-vegetables-broccoli":"1 pcs","baby-groceries-baby-vegetables-carrot":"1 kg","baby-groceries-baby-vegetables-cauliflower":"500 g","baby-groceries-baby-vegetables-jagung":"500 g","baby-groceries-baby-vegetables-potato-kentang":"1 kg","baby-groceries-baby-vegetables-pumpkin-labu":"1 kg","baby-groceries-baby-vegetables-sweet-potato-keledek":"500 g","baby-groceries-baby-vegetables-tomato":"600 g","baby-groceries-baby-vegetables-zucchini":"300 g","canned-jarred-packaged-food-baked-beans":"425 g","canned-jarred-packaged-food-sardine":"155 g","canned-jarred-packaged-food-tuna":"150 g","chicken-meat-fish-seafood-ayam-whole-seekor":"1.4 kg","chicken-meat-fish-seafood-daging-lembu-kisar":"500 g","chicken-meat-fish-seafood-ikan-bilis":"250 g","chicken-meat-fish-seafood-ikan-selar":"1 kg","chicken-meat-fish-seafood-ikan-siakap":"1 pcs","chicken-meat-fish-seafood-salmon-baby":"200 g","chicken-meat-fish-seafood-sotong":"500 g","chicken-meat-fish-seafood-telur-ayam":"10 pcs","chicken-meat-fish-seafood-udang":"500 g","cooking-sauces-seasoning-spices-asam-jawa":"200 g","cooking-sauces-seasoning-spices-belacan":"250 g","cooking-sauces-seasoning-spices-cili-boh":"250 g","cooking-sauces-seasoning-spices-cuka":"640 ml","cooking-sauces-seasoning-spices-cukup-rasa-seasoning":"300 g","cooking-sauces-seasoning-spices-garam":"500 g","cooking-sauces-seasoning-spices-gula-perang":"1 kg","cooking-sauces-seasoning-spices-gula-putih":"500 g","cooking-sauces-seasoning-spices-kicap-manis":"410 ml","cooking-sauces-seasoning-spices-kicap-masin":"340 ml","cooking-sauces-seasoning-spices-lada-putih":"30 g","cooking-sauces-seasoning-spices-mayonnaise":"470 ml","cooking-sauces-seasoning-spices-minyak-masak":"1 kg","cooking-sauces-seasoning-spices-rempah-kurma":"100 g","cooking-sauces-seasoning-spices-rempah-sup":"100 g","cooking-sauces-seasoning-spices-santan":"200 ml","cooking-sauces-seasoning-spices-serbuk-cili":"125 g","cooking-sauces-seasoning-spices-serbuk-kari-ayam-daging":"220 g","cooking-sauces-seasoning-spices-serbuk-kari-ikan":"220 g","cooking-sauces-seasoning-spices-serbuk-kunyit":"250 g","cooking-sauces-seasoning-spices-serbuk-lada-hitam":"30 g","cooking-sauces-seasoning-spices-sos-carbonara":"350 g","cooking-sauces-seasoning-spices-sos-cili":"500 g","cooking-sauces-seasoning-spices-sos-ikan":"700 ml","cooking-sauces-seasoning-spices-sos-pasta-bolognese":"350 g","cooking-sauces-seasoning-spices-sos-tiram":"510 ml","cooking-sauces-seasoning-spices-sos-tomato":"485 g","dairy-chilled-breakfast-butter":"227 g","dairy-chilled-breakfast-cheese-slices":"170 g","dairy-chilled-breakfast-coffee":"158 g","dairy-chilled-breakfast-margarine":"500 g","dairy-chilled-breakfast-milo":"800 g","dairy-chilled-breakfast-susu-cair-evaporated-milk":"390 g","dairy-chilled-breakfast-susu-fresh-milk":"2 L","dairy-chilled-breakfast-susu-pekat-manis":"500 g","dairy-chilled-breakfast-tea":"100 pcs","frozen-food-crab-stick":"250 g","frozen-food-meatball":"500 g","frozen-food-mixed-vegetables":"1 kg","frozen-food-sausage":"340 g","household-cleaning-bleach":"1 L","household-cleaning-dishwashing-liquid-sabun-basuh-pinggan":"900 ml","household-cleaning-dishwashing-sponge":"3 pcs","household-cleaning-floor-cleaner":"1.8 L","household-cleaning-garbage-bags":"30 pcs","household-cleaning-hand-wash-hand-soap":"400 ml","household-cleaning-insect-spray":"270 ml","household-cleaning-kitchen-tissue":"6 pcs","household-cleaning-laundry-detergent":"4 kg","household-cleaning-toilet-cleaner":"500 ml","household-cleaning-toilet-tissue":"10 pcs","household-cleaning-wet-wipes":"48 pcs","household-cleaning-ziplock-bags":"25 pcs","personal-care-toiletries-body-wash-sabun-mandi":"900 ml","personal-care-toiletries-conditioner":"750 ml","personal-care-toiletries-cotton-buds":"640 pcs","personal-care-toiletries-cotton-pads":"80 pcs","personal-care-toiletries-deodorant":"2×45 ml","personal-care-toiletries-face-moisturiser":"50 g","personal-care-toiletries-face-wash":"100 g","personal-care-toiletries-hair-oil-serum":"100 ml","personal-care-toiletries-pantyliner":"60 pcs","personal-care-toiletries-razor":"3 pcs","personal-care-toiletries-sanitary-pads":"10 pcs","personal-care-toiletries-shampoo":"750 ml","personal-care-toiletries-toothbrush":"2 pcs","personal-care-toiletries-toothpaste":"2×200 g","rice-noodles-pasta-dry-food-beras":"10 kg","rice-noodles-pasta-dry-food-bihun":"400 g","rice-noodles-pasta-dry-food-cereal":"500 g","rice-noodles-pasta-dry-food-maggi-kari":"5×106 g","rice-noodles-pasta-dry-food-mi-sedap":"4×139 g","rice-noodles-pasta-dry-food-roti-bread":"600 g","rice-noodles-pasta-dry-food-spaghetti":"500 g","rice-noodles-pasta-dry-food-tepung-gandum":"1 kg","rice-noodles-pasta-dry-food-tepung-goreng-ayam-seasoned-flour":"150 g","rice-noodles-pasta-dry-food-tepung-jagung":"400 g","vegetables-fresh-cooking-ingredients-bawang-besar":"1 kg","vegetables-fresh-cooking-ingredients-bawang-merah-kecil":"500 g","vegetables-fresh-cooking-ingredients-bawang-putih":"500 g","vegetables-fresh-cooking-ingredients-bayam":"250 g","vegetables-fresh-cooking-ingredients-bendi":"250 g","vegetables-fresh-cooking-ingredients-brokoli":"1 pcs","vegetables-fresh-cooking-ingredients-carrot":"1 kg","vegetables-fresh-cooking-ingredients-cauliflower":"500 g","vegetables-fresh-cooking-ingredients-cendawan":"150 g","vegetables-fresh-cooking-ingredients-cili-hijau":"1 kg","vegetables-fresh-cooking-ingredients-cili-merah":"250 g","vegetables-fresh-cooking-ingredients-cili-padi":"100 g","vegetables-fresh-cooking-ingredients-daun-bawang":"100 g","vegetables-fresh-cooking-ingredients-daun-ketumbar":"250 g","vegetables-fresh-cooking-ingredients-daun-pandan":"50 g","vegetables-fresh-cooking-ingredients-daun-sup":"100 g","vegetables-fresh-cooking-ingredients-halia":"200 g","vegetables-fresh-cooking-ingredients-jagung":"500 g","vegetables-fresh-cooking-ingredients-kacang-buncis":"250 g","vegetables-fresh-cooking-ingredients-kacang-panjang":"250 g","vegetables-fresh-cooking-ingredients-kangkung":"250 g","vegetables-fresh-cooking-ingredients-kentang":"1 kg","vegetables-fresh-cooking-ingredients-kobis":"1 kg","vegetables-fresh-cooking-ingredients-kunyit-hidup":"100 g","vegetables-fresh-cooking-ingredients-labu":"500 g","vegetables-fresh-cooking-ingredients-lengkuas":"1 kg","vegetables-fresh-cooking-ingredients-limau-kasturi":"500 g","vegetables-fresh-cooking-ingredients-salad-lettuce":"230 g","vegetables-fresh-cooking-ingredients-sawi":"1 kg","vegetables-fresh-cooking-ingredients-serai":"200 g","vegetables-fresh-cooking-ingredients-taugeh":"250 g","vegetables-fresh-cooking-ingredients-terung":"500 g","vegetables-fresh-cooking-ingredients-timun":"500 g","vegetables-fresh-cooking-ingredients-tomato":"600 g"};
+var MAXTRIPS = 40;     /* how many past trips are kept before the oldest drops off */
+var MAXHISTPDF = 12;   /* how many of them a PDF will carry */
 var ORIG = {};   /* the photo each item shipped with, so one can always be restored */
 
 /* ---------- storage ---------- */
 function hydrate(o){
   if(!o || typeof o !== "object") return false;
   if(o.state && typeof o.state === "object") o = o.state;   /* unwrap a backup file */
-  var fresh = { sel:{}, qty:{}, stk:{}, done:{}, collapsed:{}, photos:{}, price:{}, est:{}, auto:{},
-                custom:[], pics:true, seeded:0, cur:"RM", meta:{date:"",store:"",notes:""}, view:"edit" };
-  ["sel","qty","stk","done","collapsed","photos","price","est","auto"].forEach(function(k){
+  var fresh = { sel:{}, qty:{}, stk:{}, done:{}, collapsed:{}, photos:{}, price:{}, est:{}, auto:{}, wt:{},
+                custom:[], trips:[], receipt:null, pics:true, pdfhist:true, seeded:0, cur:"RM",
+                meta:{date:"",store:"",notes:""}, view:"edit" };
+  ["sel","qty","stk","done","collapsed","photos","price","est","auto","wt"].forEach(function(k){
     if(o[k] && typeof o[k] === "object" && !Array.isArray(o[k])) fresh[k] = o[k];
   });
   if(typeof o.pics === "boolean") fresh.pics = o.pics;
+  if(typeof o.pdfhist === "boolean") fresh.pdfhist = o.pdfhist;
+  if(o.receipt && typeof o.receipt === "object"){
+    fresh.receipt = {img: o.receipt.img || "", text: o.receipt.text || ""};
+    if(!fresh.receipt.img && !fresh.receipt.text) fresh.receipt = null;
+  }
   if(o.seeded) fresh.seeded = 1;
   if(typeof o.cur === "string" && o.cur) fresh.cur = o.cur;
   if(Array.isArray(o.custom)){
@@ -633,8 +842,13 @@ function hydrate(o){
       return c && typeof c.id === "string" && typeof c.key === "string" && typeof c.name === "string";
     });
   }
+  if(Array.isArray(o.trips)){
+    fresh.trips = o.trips.filter(function(t){
+      return t && typeof t === "object" && Array.isArray(t.items);
+    }).slice(0, MAXTRIPS);
+  }
   if(o.meta) fresh.meta = {date:o.meta.date||"", store:o.meta.store||"", notes:o.meta.notes||""};
-  if(o.view === "list" || o.view === "bought") fresh.view = o.view;
+  if(o.view === "list" || o.view === "bought" || o.view === "history") fresh.view = o.view;
   S = fresh;
   return true;
 }
@@ -675,7 +889,8 @@ $$(".item").forEach(function(el){
   itemEls[id] = el;
   ORIG[id] = $(".thumb", el).getAttribute("src");
   var fields = $(".fields", el);
-  fields.className = "fields3";
+  fields.className = "fields4";
+  fields.appendChild(sizeField(id, $(".nm", el).textContent));
   var lab = document.createElement("label"); lab.className = "f estfield";
   var cap = document.createElement("span"); cap.className = "fl"; cap.textContent = "Est. price";
   var inp = document.createElement("input");
@@ -706,6 +921,68 @@ function seedEstimates(){
 }
 function photoFor(id){ return S.photos[id] || ORIG[id]; }
 
+/* ---------- pack size ---------- */
+function sizeField(id, name){
+  var l = document.createElement("label"); l.className = "f";
+  var t = document.createElement("span"); t.className = "fl"; t.textContent = "Size";
+  var i = document.createElement("input");
+  i.className = "wput"; i.type = "text"; i.autocomplete = "off";
+  i.placeholder = WT[id] || "e.g. 500 g";
+  i.setAttribute("aria-label", "Pack size for " + name);
+  l.appendChild(t); l.appendChild(i);
+  return l;
+}
+/* what one pack of this item weighs: your own value, else the shipped one */
+function sizeOf(id){
+  var v = String(S.wt[id] || "").trim();
+  return v || WT[id] || "";
+}
+/* "4x139 g" -> {n:4, v:139, u:"g", total:556}. Grams and millilitres are the base units. */
+function parseSize(str){
+  var t = String(str || "").toLowerCase().replace(/[\u00d7*]/g, "x").trim();
+  if(!t) return null;
+  var n = 1, v, u, m = t.match(/^(\d+(?:\.\d+)?)\s*x\s*(\d+(?:\.\d+)?)\s*([a-z]*)/);
+  if(m){ n = parseFloat(m[1]); v = parseFloat(m[2]); u = m[3]; }
+  else{
+    m = t.match(/^(\d+(?:\.\d+)?)\s*([a-z]*)/);
+    if(!m) return null;
+    v = parseFloat(m[1]); u = m[2];
+  }
+  if(!isFinite(v) || !isFinite(n) || v <= 0) return null;
+  if(u === "kg"){ v *= 1000; u = "g"; }
+  else if(u === "l" || u === "litre" || u === "liter"){ v *= 1000; u = "ml"; }
+  else if(u === "ml"){ u = "ml"; }
+  else if(u === "g" || u === "gm" || u === "gram" || u === "" ){ u = "g"; }
+  else u = "pcs";
+  return {n: n, v: v, u: u, total: n * v};
+}
+function fmtG(g){
+  return g >= 1000 ? String(Math.round(g / 100) / 10).replace(/\.0$/, "") + " kg"
+                   : Math.round(g) + " g";
+}
+function fmtMl(ml){
+  return ml >= 1000 ? String(Math.round(ml / 100) / 10).replace(/\.0$/, "") + " L"
+                    : Math.round(ml) + " ml";
+}
+/* how much the whole trolley weighs, quantities included */
+function weightTotal(ids){
+  var g = 0, ml = 0, pcs = 0, none = 0;
+  (ids || selectedIds()).forEach(function(id){
+    var p = parseSize(sizeOf(id));
+    if(!p){ none++; return; }
+    var t = p.total * qtyOf(id);
+    if(p.u === "g") g += t; else if(p.u === "ml") ml += t; else pcs += t;
+  });
+  return {g: g, ml: ml, pcs: pcs, none: none};
+}
+function weightLine(w){
+  var bits = [];
+  if(w.g) bits.push(fmtG(w.g));
+  if(w.ml) bits.push(fmtMl(w.ml));
+  if(w.pcs) bits.push(Math.round(w.pcs) + " pcs");
+  return bits.join("  \u00b7  ");
+}
+
 function paintItem(id){
   var el = itemEls[id]; if(!el) return;
   var on = !!S.sel[id];
@@ -716,6 +993,8 @@ function paintItem(id){
   $(".cb", el).checked = on;
   $(".q", el).value = S.qty[id] || "";
   $(".s", el).value = S.stk[id] || "";
+  var wp = $(".wput", el);
+  if(wp && document.activeElement !== wp) wp.value = S.wt[id] || "";
   var ep = $(".eput", el);
   if(ep && document.activeElement !== ep){
     ep.value = S.est[id] || "";
@@ -764,7 +1043,7 @@ function paintAll(){
 /* ---------- selection ---------- */
 function wipe(id){
   delete S.sel[id]; delete S.done[id]; delete S.price[id];
-  delete S.qty[id]; delete S.stk[id]; delete S.auto[id];   /* the estimate is kept: it is a price, not a choice */
+  delete S.qty[id]; delete S.stk[id]; delete S.auto[id];   /* the estimate and size are kept: they describe the product, not the choice */
 }
 function setSel(id, on){
   if(on) S.sel[id] = 1; else wipe(id);
@@ -784,6 +1063,13 @@ $("#checklist").addEventListener("click", function(e){
 });
 /* typing a quantity or stock value ticks the item automatically */
 $("#checklist").addEventListener("input", function(e){
+  var wp = e.target.closest && e.target.closest(".wput");
+  if(wp){
+    var wid = wp.closest(".item").dataset.id, wv = wp.value.trim();
+    if(wv && wv !== WT[wid]) S.wt[wid] = wv; else delete S.wt[wid];
+    paintTally(); save();
+    return;
+  }
   var ep = e.target.closest && e.target.closest(".eput");
   if(ep){
     var eid = ep.closest(".item").dataset.id, ev = ep.value.trim();
@@ -848,7 +1134,7 @@ function buildCard(id, name){
   var nl = el("label", "nmlab", {"for": "cb_" + id});
   var nm = el("span", "nm"); nm.textContent = name; nl.appendChild(nm);
   row.appendChild(lab); row.appendChild(pw); row.appendChild(nl);
-  var f = el("div", "fields3");
+  var f = el("div", "fields4");
   [["q", "Qty", "Quantity for "], ["s", "Stock", "Current stock of "]].forEach(function(p){
     var l = el("label", "f");
     var t = el("span", "fl"); t.textContent = p[1];
@@ -857,6 +1143,7 @@ function buildCard(id, name){
         autocomplete: "off", placeholder: "—", "aria-label": p[2] + name}));
     f.appendChild(l);
   });
+  f.appendChild(sizeField(id, name));
   var eb2 = el("label", "f estfield");
   var el2 = el("span", "fl"); el2.textContent = "Est. price";
   var ei = el("input", "eput", {type: "text", inputmode: "decimal", autocomplete: "off",
@@ -1052,9 +1339,10 @@ $("#expand").addEventListener("click", function(){
   paintAll(); save();
 });
 $("#reset").addEventListener("click", function(){
-  if(!confirm("Reset everything?\n\nThis clears every ticked item, every quantity, stock value and price, and the date, store and notes. Items you added and photos you replaced are kept. It cannot be undone.")) return;
+  if(!confirm("Reset everything?\n\nThis clears every ticked item, every quantity, stock value and price, and the date, store and notes. Items you added, photos you replaced, pack sizes and your saved trips are kept. It cannot be undone.")) return;
   S = { sel:{}, qty:{}, stk:{}, done:{}, collapsed:{}, photos:S.photos, price:{}, est:S.est, auto:{},
-        custom:S.custom, pics:S.pics, seeded:S.seeded, cur:S.cur,
+        wt:S.wt, custom:S.custom, trips:S.trips, receipt:null, pics:S.pics, pdfhist:S.pdfhist,
+        seeded:S.seeded, cur:S.cur,
         meta:{date:"",store:"",notes:""}, view:"edit" };
   saveNow();
   $("#mdate").value = ""; $("#mstore").value = ""; $("#mnotes").value = "";
@@ -1069,7 +1357,9 @@ function stateSummary(o){
   var mine = (o.custom || []).length;
   var prices = Object.keys(o.price || {}).length;
   var pics = Object.keys(o.photos || {}).length;
+  var trips = (o.trips || []).length;
   var bits = [sel + (sel === 1 ? " ticked item" : " ticked items")];
+  if(trips) bits.push(trips + (trips === 1 ? " past trip" : " past trips"));
   if(mine) bits.push(mine + (mine === 1 ? " item you added" : " items you added"));
   if(prices) bits.push(prices + (prices === 1 ? " price" : " prices"));
   if(pics) bits.push(pics + (pics === 1 ? " replaced photo" : " replaced photos"));
@@ -1121,7 +1411,7 @@ $("#backupfile").addEventListener("change", function(){
     $("#mdate").value = S.meta.date; $("#mstore").value = S.meta.store;
     $("#mnotes").value = S.meta.notes; $("#mcur").value = S.cur;
     $("#search").value = "";
-    paintAll(); syncMeta(); applyPics(); runSearch(); showEdit();
+    paintAll(); syncMeta(); applyPics(); runSearch(); paintReceipt(); paintHistOpt(); showEdit();
     saveNow();
     toast("Restored — " + stateSummary(S));
   };
@@ -1196,17 +1486,19 @@ function buildList(){
         + (S.done[it.id] ? " checked" : "") + '><span class="pbox" aria-hidden="true"></span></td>'
         + '<td class="pic"><img class="lthumb" src="' + photoFor(it.id) + '" alt=""></td>'
         + '<td class="nm2">' + esc(it.name) + '</td>'
+        + '<td class="sz">' + esc(sizeOf(it.id)) + '</td>'
         + '<td class="qty">' + esc(S.qty[it.id] || "") + '</td>'
         + '<td class="stk">' + esc(S.stk[it.id] || "") + '</td>'
         + '<td class="est">' + (estOf(it.id) ? esc(S.cur + " " + money(estOf(it.id) * qtyOf(it.id))) : "") + '</td></tr>';
     });
     if(!got) return;
-    rows += '<tr class="grouprow c-' + c.key + '"><th colspan="6" scope="colgroup">'
+    rows += '<tr class="grouprow c-' + c.key + '"><th colspan="7" scope="colgroup">'
       + esc(c.name) + '</th></tr>' + got;
   });
   body.innerHTML = rows
     ? '<table class="listtable"><thead><tr><th class="tick">Tick</th>'
       + '<th class="pic"><span class="sr">Photo</span></th><th>Item</th>'
+      + '<th class="sz">Size</th>'
       + '<th class="qty">Quantity</th><th class="stk">Current Stock</th>'
       + '<th class="est">Est. cost</th></tr></thead>'
       + '<tbody>' + rows + '</tbody></table>'
@@ -1217,6 +1509,7 @@ function buildList(){
   $("#estnote").textContent = e.unpriced
     ? e.unpriced + (e.unpriced === 1 ? " item has no price yet" : " items have no price yet")
     : "every item priced";
+  $("#estwt").textContent = weightLine(weightTotal()) || "\u2014";
   $("#listsub").textContent = n === 0 ? "Nothing ticked yet."
     : n + (n === 1 ? " item" : " items") + " from your checklist.";
   $("#printfoot").textContent = n + (n === 1 ? " item" : " items") + " on this list.";
@@ -1270,6 +1563,7 @@ function buildBought(){
         + (isB ? " checked" : "") + '><span class="pbox' + (isB ? " ticked" : "") + '" aria-hidden="true"></span></td>'
         + '<td class="pic"><img class="lthumb" src="' + photoFor(it.id) + '" alt=""></td>'
         + '<td class="nm2">' + esc(it.name) + '</td>'
+        + '<td class="sz">' + esc(sizeOf(it.id)) + '</td>'
         + '<td class="qty">' + esc(S.qty[it.id] || "") + '</td>'
         + '<td class="est">' + (estOf(it.id) ? esc(S.cur + " " + money(estOf(it.id) * qtyOf(it.id))) : "") + '</td>'
         + '<td class="price"><input class="pinput" type="text" inputmode="decimal" autocomplete="off"'
@@ -1279,12 +1573,13 @@ function buildBought(){
         + '</span></td></tr>';
     });
     if(!got) return;
-    rows += '<tr class="grouprow c-' + c.key + '"><th colspan="6" scope="colgroup">'
+    rows += '<tr class="grouprow c-' + c.key + '"><th colspan="7" scope="colgroup">'
       + esc(c.name) + '</th></tr>' + got;
   });
   $("#boughtbody").innerHTML = rows
     ? '<table class="listtable"><thead><tr><th class="tick">Bought</th>'
       + '<th class="pic"><span class="sr">Photo</span></th><th>Item</th>'
+      + '<th class="sz">Size</th>'
       + '<th class="qty">Quantity</th><th class="est">Estimated</th>'
       + '<th class="price">Price</th></tr></thead>'
       + '<tbody>' + rows + '</tbody></table>'
@@ -1354,26 +1649,37 @@ function applyPics(){
 
 function showList(){
   S.view = "list"; save(); applyPics();
-  buildList(); buildBought(); syncMeta();
+  buildList(); buildBought(); syncMeta(); paintHistOpt();
   $("#checklist").hidden = true;
-  $("#listview").hidden = false; $("#boughtview").hidden = true;
+  $("#listview").hidden = false; $("#boughtview").hidden = true; $("#histview").hidden = true;
   $("#deck").hidden = true; $("#hint").hidden = true; $("#dock").hidden = true;
+  document.body.classList.remove("printhist");
   window.scrollTo(0, 0);
 }
 function showBought(){
   S.view = "bought"; save(); applyPics();
-  buildList(); buildBought();
+  buildList(); buildBought(); paintReceipt();
   $("#mcur").value = S.cur;
   $("#checklist").hidden = true;
-  $("#listview").hidden = true; $("#boughtview").hidden = false;
+  $("#listview").hidden = true; $("#boughtview").hidden = false; $("#histview").hidden = true;
   $("#deck").hidden = true; $("#hint").hidden = true; $("#dock").hidden = true;
+  document.body.classList.remove("printhist");
   window.scrollTo(0, 0);
 }
 function showEdit(){
   S.view = "edit"; save();
   $("#checklist").hidden = false;
-  $("#listview").hidden = true; $("#boughtview").hidden = true;
+  $("#listview").hidden = true; $("#boughtview").hidden = true; $("#histview").hidden = true;
   $("#deck").hidden = false; $("#hint").hidden = false; $("#dock").hidden = false;
+  document.body.classList.remove("printhist");
+}
+/* the "add my previous trips" tick only makes sense once there are some */
+function paintHistOpt(){
+  var n = (S.trips || []).length;
+  $("#wrap-pdfhist").hidden = !n;
+  $("#withhist").checked = !!S.pdfhist;
+  $("#tohist").textContent = n ? "Previous groceries (" + n + ")" : "Previous groceries";
+  $("#tohist2").textContent = $("#tohist").textContent;
 }
 $("#tobought").addEventListener("click", showBought);
 $("#tolist").addEventListener("click", showList);
@@ -1424,7 +1730,14 @@ $("#clrdone").addEventListener("click", function(){
 });
 
 /* printing from the checklist still prints the shopping list */
-window.addEventListener("beforeprint", function(){ buildList(); buildBought(); syncMeta(); });
+window.addEventListener("beforeprint", function(){
+  buildList(); buildBought(); syncMeta();
+  if(document.body.classList.contains("printhist")){
+    buildHistory();
+    /* a closed <details> prints nothing, so open every trip for the paper copy */
+    $$("#histbody .trip").forEach(function(d){ d.open = true; });
+  }
+});
 
 
 /* ---------------- PDF export ----------------
@@ -1473,18 +1786,21 @@ function wrapText(str, maxW, size, bold){
   if(cur) lines.push(cur);
   return lines;
 }
-function jpegFor(src, px){
+/* Any photo, aspect kept, re-encoded so /DCTDecode is guaranteed to accept it. */
+function jpegAny(src, maxpx){
   return new Promise(function(res){
     var im = new Image();
     im.onload = function(){
       try{
-        var cv = document.createElement("canvas"); cv.width = px; cv.height = px;
+        var w = im.naturalWidth, h = im.naturalHeight;
+        var sc = Math.min(1, maxpx / Math.max(w, h));
+        var cw = Math.max(1, Math.round(w * sc)), ch = Math.max(1, Math.round(h * sc));
+        var cv = document.createElement("canvas"); cv.width = cw; cv.height = ch;
         var cx = cv.getContext("2d");
-        cx.fillStyle = "#fff"; cx.fillRect(0, 0, px, px);
-        var side = Math.min(im.naturalWidth, im.naturalHeight);
-        cx.drawImage(im, (im.naturalWidth - side) / 2, (im.naturalHeight - side) / 2,
-                     side, side, 0, 0, px, px);
-        res(atob(cv.toDataURL("image/jpeg", 0.7).split(",")[1]));
+        if(!cx){ res(null); return; }
+        cx.fillStyle = "#fff"; cx.fillRect(0, 0, cw, ch);
+        cx.drawImage(im, 0, 0, cw, ch);
+        res({bin: atob(cv.toDataURL("image/jpeg", 0.72).split(",")[1]), w: cw, h: ch});
       }catch(e){ res(null); }
     };
     im.onerror = function(){ res(null); };
@@ -1492,60 +1808,100 @@ function jpegFor(src, px){
   });
 }
 
-async function makePdf(){
+/* opt.trips  — past trips to append (defaults to your saved ones when the option is on)
+   opt.only   — leave the current list out and print those trips alone
+   opt.name   — file name to save under */
+async function makePdf(opt){
+  opt = opt || {};
+  var histTrips = opt.trips
+    || ((S.pdfhist && (S.trips || []).length) ? S.trips.slice(0, MAXHISTPDF) : []);
   var groups = [];
-  CATS.forEach(function(c){
-    var picked = c.items.filter(function(it){ return S.sel[it.id]; });
-    if(picked.length) groups.push({ name: c.name, items: picked });
-  });
-  if(!groups.length){ toast("Tick at least one item first"); return "empty"; }
+  if(!opt.only){
+    CATS.forEach(function(c){
+      var picked = c.items.filter(function(it){ return S.sel[it.id]; });
+      if(picked.length) groups.push({ name: c.name, items: picked });
+    });
+  }
+  if(!groups.length && !histTrips.length){ toast("Tick at least one item first"); return "empty"; }
 
-  var pics = !!S.pics, jpg = {};
+  var pics = !!S.pics && groups.length > 0, jpg = {};
   if(pics){
     for(var g = 0; g < groups.length; g++){
       for(var i = 0; i < groups[g].items.length; i++){
         var id = groups[g].items[i].id;
-        if(!jpg[id]) jpg[id] = await jpegFor(photoFor(id), 96);
+        if(!jpg[id]) jpg[id] = await jpegAny(photoFor(id), 96);
       }
     }
   }
+  var rcImgs = {};
+  for(var h = 0; h < histTrips.length; h++){
+    if(histTrips[h].img) rcImgs[histTrips[h].tid] = await jpegAny(histTrips[h].img, 1100);
+  }
 
   var PW = 595.28, PH = 841.89, M = 34;
-  var wTick = 38, wPic = pics ? 34 : 0;
-  var xItem = M + wTick + wPic;
-  var rStock = PW - M, rQty = rStock - 74;
-  var rowH = pics ? 30 : 14.5;
-  var pages = [], ops = "", y = 0, used = {};
+  var mode = groups.length ? "list" : "hist";
+  var pages = [], ops = "", y = 0, used = {}, histLabel = "";
+
+  /* column geometry, right edges first — the past-trip pages carry no photos */
+  function wTick(){ return 38; }
+  function wPic(){ return (pics && mode !== "hist") ? 34 : 0; }
+  function xItem(){ return M + wTick() + wPic(); }
+  var rLast = PW - M;                 /* current stock, or the price paid */
+  var rEst  = rLast - 62;
+  var rQty  = rEst - 56;
+  var rSize = rQty - 48;
+  function rowH(){ return (pics && mode !== "hist") ? 30 : 14.5; }
 
   function txt(x, yy, size, bold, str){
     return "BT /" + (bold ? "F2" : "F1") + " " + size + " Tf 0 g 1 0 0 1 " +
            x.toFixed(2) + " " + yy.toFixed(2) + " Tm " + pdfStr(str) + " Tj ET\n";
   }
   function rtxt(rx, yy, size, bold, str){ return txt(rx - tw(str, size, bold), yy, size, bold, str); }
+  function clip(str, maxW, size, bold){
+    var t = String(str);
+    if(tw(t, size, bold) <= maxW) return t;
+    while(t.length > 1 && tw(t + "…", size, bold) > maxW) t = t.slice(0, -1);
+    return t + "…";
+  }
   function rule(yy, w, gray){
     return (gray || 0).toFixed(2) + " G " + w + " w " + M.toFixed(2) + " " + yy.toFixed(2) +
            " m " + (PW - M).toFixed(2) + " " + yy.toFixed(2) + " l S\n";
   }
-  var mode = "list";
+  function box(x, yy){ return "0 G 0.7 w " + x.toFixed(2) + " " + yy.toFixed(2) + " 9.6 9.6 re S\n"; }
+  function tick(x, yy){
+    return "0 G 1.2 w 1 J 1 j " + (x + 2.1).toFixed(2) + " " + (yy + 5).toFixed(2) +
+           " m " + (x + 4).toFixed(2) + " " + (yy + 2.6).toFixed(2) +
+           " l " + (x + 7.6).toFixed(2) + " " + (yy + 7.4).toFixed(2) + " l S\n";
+  }
+  function pageTitle(){
+    if(mode === "bought") return "What I Bought";
+    if(mode === "hist") return histLabel || "Previous Groceries";
+    return "Shopping List";
+  }
   function tableHead(){
-    var o = txt(M, y, 7, true, mode === "bought" ? "BOUGHT" : "TICK");
-    if(pics) o += txt(M + wTick, y, 7, true, "PHOTO");
-    o += txt(xItem, y, 7, true, "ITEM")
-       + rtxt(rQty, y, 7, true, "QUANTITY")
-       + rtxt(rStock, y, 7, true, mode === "bought" ? "PRICE" : "CURRENT STOCK");
+    var o = txt(M, y, 7, true, mode === "list" ? "TICK" : (mode === "hist" ? "GOT" : "BOUGHT"));
+    if(wPic()) o += txt(M + wTick(), y, 7, true, "PHOTO");
+    o += txt(xItem(), y, 7, true, "ITEM")
+       + rtxt(rSize, y, 7, true, "SIZE")
+       + rtxt(rQty, y, 7, true, "QTY")
+       + rtxt(rEst, y, 7, true, "EST.")
+       + rtxt(rLast, y, 7, true, mode === "list" ? "STOCK" : "PAID");
     y -= 4; o += rule(y, 0.6, 0.4); y -= 2;
     return o;
   }
-  function newPage(first){
+  function metaRows(){
+    return [["DATE", S.meta.date ? fmtDate(S.meta.date) : ""],
+            ["STORE", S.meta.store], ["NOTES", S.meta.notes]];
+  }
+  function newPage(first, meta){
     if(ops) pages.push(ops);
     ops = ""; y = PH - M - 14;
-    var title = mode === "bought" ? "What I Bought" : "Shopping List";
     if(first){
-      ops += txt(M, y, 17, true, title); y -= 17;
-      [["DATE", S.meta.date ? fmtDate(S.meta.date) : ""],
-       ["STORE", S.meta.store], ["NOTES", S.meta.notes]].forEach(function(m){
+      if(mode === "hist"){ ops += txt(M, y, 8, true, "PREVIOUS GROCERIES"); y -= 12; }
+      ops += txt(M, y, 17, true, pageTitle()); y -= 17;
+      (meta || metaRows()).forEach(function(m){
         if(!m[1]) return;
-        wrapText(m[1], rStock - M - 46, 9.5, false).forEach(function(ln, i){
+        wrapText(m[1], rLast - M - 46, 9.5, false).forEach(function(ln, i){
           if(i === 0) ops += txt(M, y, 8, true, m[0]);
           ops += txt(M + 42, y, 9.5, false, ln);
           y -= 12;
@@ -1553,7 +1909,7 @@ async function makePdf(){
       });
       y -= 2; ops += rule(y, 1.1, 0); y -= 13;
     }else{
-      ops += txt(M, y, 10, true, title + " (continued)");
+      ops += txt(M, y, 10, true, pageTitle() + " (continued)");
       y -= 6; ops += rule(y, 1.1, 0); y -= 11;
     }
     ops += tableHead();
@@ -1563,37 +1919,56 @@ async function makePdf(){
     ops += txt(M, y, 9, true, cont ? name + " (continued)" : name);
     y -= 5.5; ops += rule(y, 0.8, 0); y -= 4;   /* y is now the top edge of the first row */
   }
+  function photoCell(id, top){
+    if(!wPic() || !jpg[id]) return "";
+    var nm = "Im" + id.replace(/[^A-Za-z0-9]/g, "");
+    used[nm] = jpg[id];
+    return "q 24 0 0 24 " + (M + wTick()).toFixed(2) + " " + (top - 26).toFixed(2) +
+           " cm /" + nm + " Do Q\n";
+  }
+  function rowRule(){
+    var sep = y + ((pics && mode !== "hist") ? 2 : 1.5);
+    return "0.78 G 0.3 w " + M.toFixed(2) + " " + sep.toFixed(2) + " m " +
+           rLast.toFixed(2) + " " + sep.toFixed(2) + " l S\n";
+  }
 
-  newPage(true);
+  /* ---- the shopping list ---- */
   var total = 0;
-  groups.forEach(function(gr){
-    if(y - (18.5 + rowH) < M) newPage(false);
-    groupHead(gr.name, false);
-    gr.items.forEach(function(it){
-      if(y - rowH < M + 4){ newPage(false); groupHead(gr.name, true); }
-      var top = y, mid = pics ? top - 17 : top - 9.5;
-      ops += "0 G 0.7 w " + M.toFixed(2) + " " + (mid - 2.4).toFixed(2) + " 9.6 9.6 re S\n";
-      if(pics && jpg[it.id]){
-        var nm = "Im" + it.id.replace(/[^A-Za-z0-9]/g, "");
-        used[nm] = it.id;
-        ops += "q 24 0 0 24 " + (M + wTick).toFixed(2) + " " + (top - 26).toFixed(2) +
-               " cm /" + nm + " Do Q\n";
-      }
-      ops += txt(xItem, mid, 9, false, it.name);
-      var q = S.qty[it.id] || "", st = S.stk[it.id] || "";
-      if(q) ops += rtxt(rQty, mid, 9, false, q);
-      if(st) ops += rtxt(rStock, mid, 9, false, st);
-      y -= rowH;
-      var sep = y + (pics ? 2 : 1.5);
-      ops += "0.78 G 0.3 w " + M.toFixed(2) + " " + sep.toFixed(2) + " m " +
-             rStock.toFixed(2) + " " + sep.toFixed(2) + " l S\n";
-      total++;
+  if(groups.length){
+    newPage(true);
+    groups.forEach(function(gr){
+      if(y - (18.5 + rowH()) < M) newPage(false);
+      groupHead(gr.name, false);
+      gr.items.forEach(function(it){
+        if(y - rowH() < M + 4){ newPage(false); groupHead(gr.name, true); }
+        var top = y, mid = (pics ? top - 17 : top - 9.5);
+        ops += box(M, mid - 2.4);
+        ops += photoCell(it.id, top);
+        ops += txt(xItem(), mid, 9, false, clip(it.name, rSize - 40 - xItem(), 9, false));
+        var sz = sizeOf(it.id), q = S.qty[it.id] || "", st = S.stk[it.id] || "";
+        var es = estOf(it.id) ? S.cur + " " + money(estOf(it.id) * qtyOf(it.id)) : "";
+        if(sz) ops += rtxt(rSize, mid, 8.5, false, sz);
+        if(q)  ops += rtxt(rQty, mid, 9, false, q);
+        if(es) ops += rtxt(rEst, mid, 9, false, es);
+        if(st) ops += rtxt(rLast, mid, 9, false, st);
+        y -= rowH();
+        ops += rowRule();
+        total++;
+      });
+      y -= 3;
     });
-    y -= 3;
-  });
-  if(y - 20 < M) newPage(false);
-  y -= 8; ops += rule(y, 0.5, 0.55); y -= 10;
-  ops += txt(M, y, 8, false, total + (total === 1 ? " item" : " items") + " on this list.");
+    if(y - 30 < M) newPage(false);
+    y -= 8; ops += rule(y, 0.5, 0.55); y -= 10;
+    var eT = estimateTotal(), wT = weightLine(weightTotal());
+    ops += txt(M, y, 8, false, total + (total === 1 ? " item" : " items") + " on this list."
+      + (wT ? "  Roughly " + wT + " to carry." : ""));
+    ops += rtxt(rLast, y, 11, true, "Estimated  " + S.cur + " " + money(eT.sum));
+    if(eT.unpriced){
+      y -= 10;
+      ops += rtxt(rLast, y, 7.5, false, eT.unpriced
+        + (eT.unpriced === 1 ? " item has no price yet" : " items have no price yet"));
+    }
+  }
 
   /* ---- the extra page: what I bought, with prices ---- */
   var nSel = 0, nBought = 0, spend = 0;
@@ -1605,32 +1980,23 @@ async function makePdf(){
     mode = "bought";
     newPage(true);                       /* pushes the list pages and starts a fresh sheet */
     groups.forEach(function(gr){
-      if(y - (18.5 + rowH) < M) newPage(false);
+      if(y - (18.5 + rowH()) < M) newPage(false);
       groupHead(gr.name, false);
       gr.items.forEach(function(it){
-        if(y - rowH < M + 4){ newPage(false); groupHead(gr.name, true); }
-        var top = y, mid = pics ? top - 17 : top - 9.5;
-        var bx = M, by = mid - 2.4;
-        ops += "0 G 0.7 w " + bx.toFixed(2) + " " + by.toFixed(2) + " 9.6 9.6 re S\n";
-        if(S.done[it.id]){
-          ops += "0 G 1.2 w 1 J 1 j " + (bx + 2.1).toFixed(2) + " " + (by + 5).toFixed(2) +
-                 " m " + (bx + 4).toFixed(2) + " " + (by + 2.6).toFixed(2) +
-                 " l " + (bx + 7.6).toFixed(2) + " " + (by + 7.4).toFixed(2) + " l S\n";
-        }
-        if(pics && jpg[it.id]){
-          var nm2 = "Im" + it.id.replace(/[^A-Za-z0-9]/g, "");
-          used[nm2] = it.id;
-          ops += "q 24 0 0 24 " + (M + wTick).toFixed(2) + " " + (top - 26).toFixed(2) +
-                 " cm /" + nm2 + " Do Q\n";
-        }
-        ops += txt(xItem, mid, 9, false, it.name);
-        var q2 = S.qty[it.id] || "";
-        if(q2) ops += rtxt(rQty, mid, 9, false, q2);
-        if(S.price[it.id]) ops += rtxt(rStock, mid, 9, false, S.cur + " " + money(priceOf(it.id)));
-        y -= rowH;
-        var sep2 = y + (pics ? 2 : 1.5);
-        ops += "0.78 G 0.3 w " + M.toFixed(2) + " " + sep2.toFixed(2) + " m " +
-               rStock.toFixed(2) + " " + sep2.toFixed(2) + " l S\n";
+        if(y - rowH() < M + 4){ newPage(false); groupHead(gr.name, true); }
+        var top = y, mid = (pics ? top - 17 : top - 9.5), by = mid - 2.4;
+        ops += box(M, by);
+        if(S.done[it.id]) ops += tick(M, by);
+        ops += photoCell(it.id, top);
+        ops += txt(xItem(), mid, 9, false, clip(it.name, rSize - 40 - xItem(), 9, false));
+        var sz2 = sizeOf(it.id), q2 = S.qty[it.id] || "";
+        var es2 = estOf(it.id) ? S.cur + " " + money(estOf(it.id) * qtyOf(it.id)) : "";
+        if(sz2) ops += rtxt(rSize, mid, 8.5, false, sz2);
+        if(q2)  ops += rtxt(rQty, mid, 9, false, q2);
+        if(es2) ops += rtxt(rEst, mid, 9, false, es2);
+        if(S.price[it.id]) ops += rtxt(rLast, mid, 9, false, S.cur + " " + money(priceOf(it.id)));
+        y -= rowH();
+        ops += rowRule();
       });
       y -= 3;
     });
@@ -1638,7 +2004,64 @@ async function makePdf(){
     y -= 8; ops += rule(y, 1, 0); y -= 13;
     ops += txt(M, y, 9, false, nBought + " of " + nSel +
                (nSel === 1 ? " item bought" : " items bought"));
-    ops += rtxt(rStock, y, 12, true, "Total  " + S.cur + " " + money(spend));
+    ops += rtxt(rLast, y, 12, true, "Total  " + S.cur + " " + money(spend));
+  }
+
+  /* ---- extra pages: previous groceries, one trip per sheet ---- */
+  if(histTrips.length){
+    mode = "hist";
+    histTrips.forEach(function(tr){
+      var cur = tr.cur || S.cur;
+      var got = 0, spent = 0;
+      tr.items.forEach(function(i){ if(i.got || i.paid) got++; spent += i.paid || 0; });
+      histLabel = tripTitle(tr);
+      newPage(true, [["BOUGHT", got + " of " + tr.items.length + " items"],
+                     ["TOTAL", cur + " " + money(spent)
+                       + (tr.est ? "   (estimated " + cur + " " + money(tr.est) + ")" : "")],
+                     ["NOTES", tr.notes || ""]]);
+      var lastCat = "";
+      tr.items.forEach(function(i){
+        if(i.catn !== lastCat){
+          lastCat = i.catn;
+          if(y - (18.5 + rowH()) < M) newPage(false);
+          groupHead(lastCat, false);
+        }else if(y - rowH() < M + 4){
+          newPage(false); groupHead(lastCat, true);
+        }
+        var mid = y - 9.5, by = mid - 2.4;
+        ops += box(M, by);
+        if(i.got || i.paid) ops += tick(M, by);
+        ops += txt(xItem(), mid, 9, false, clip(i.name, rSize - 40 - xItem(), 9, false));
+        if(i.sz)  ops += rtxt(rSize, mid, 8.5, false, i.sz);
+        if(i.qty) ops += rtxt(rQty, mid, 9, false, String(i.qty));
+        if(i.est) ops += rtxt(rEst, mid, 9, false, cur + " " + money(i.est));
+        if(i.paid) ops += rtxt(rLast, mid, 9, false, cur + " " + money(i.paid));
+        y -= rowH();
+        ops += rowRule();
+      });
+      if(y - 26 < M) newPage(false);
+      y -= 8; ops += rule(y, 1, 0); y -= 13;
+      ops += txt(M, y, 9, false, got + " of " + tr.items.length
+                 + (tr.items.length === 1 ? " item bought" : " items bought"));
+      ops += rtxt(rLast, y, 12, true, "Total  " + cur + " " + money(spent));
+
+      /* the receipt itself, on its own sheet */
+      var ri = rcImgs[tr.tid];
+      if(ri){
+        if(ops) pages.push(ops);
+        ops = ""; y = PH - M - 14;
+        ops += txt(M, y, 11, true, "Receipt — " + histLabel);
+        y -= 7; ops += rule(y, 0.8, 0); y -= 8;
+        var availW = PW - 2 * M, availH = y - M;
+        var sc = Math.min(availW / ri.w, availH / ri.h);
+        var dw = ri.w * sc, dh = ri.h * sc;
+        var nm = "Rc" + String(tr.tid).replace(/[^A-Za-z0-9]/g, "");
+        used[nm] = ri;
+        ops += "q " + dw.toFixed(2) + " 0 0 " + dh.toFixed(2) + " " +
+               ((PW - dw) / 2).toFixed(2) + " " + (y - dh).toFixed(2) + " cm /" + nm + " Do Q\n";
+        y -= dh;
+      }
+    });
   }
   pages.push(ops);
 
@@ -1648,10 +2071,11 @@ async function makePdf(){
     "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>"];
   var imgNum = {};
   Object.keys(used).forEach(function(nm){
-    var bin = jpg[used[nm]];
-    objs.push("<< /Type /XObject /Subtype /Image /Width 96 /Height 96 /ColorSpace /DeviceRGB " +
-              "/BitsPerComponent 8 /Filter /DCTDecode /Length " + bin.length + " >>\nstream\n" +
-              bin + "\nendstream");
+    var im = used[nm];
+    if(!im || !im.bin) return;
+    objs.push("<< /Type /XObject /Subtype /Image /Width " + im.w + " /Height " + im.h +
+              " /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length " +
+              im.bin.length + " >>\nstream\n" + im.bin + "\nendstream");
     imgNum[nm] = objs.length;
   });
   var xobj = Object.keys(imgNum).map(function(nm){ return "/" + nm + " " + imgNum[nm] + " 0 R"; }).join(" ");
@@ -1680,7 +2104,7 @@ async function makePdf(){
   var bytes = new Uint8Array(out.length);
   for(var i = 0; i < out.length; i++) bytes[i] = out.charCodeAt(i) & 0xFF;
 
-  var name = "shopping-list-" + (S.meta.date || new Date().toISOString().slice(0, 10)) + ".pdf";
+  var name = opt.name || ("shopping-list-" + (S.meta.date || todayISO()) + ".pdf");
   return offerFile(name, new Blob([bytes], { type: "application/pdf" }));
 }
 
@@ -1710,6 +2134,520 @@ async function offerFile(name, blob){
   return "link";
 }
 
+/* ---------- previous groceries ---------- */
+function todayISO(){
+  var d = new Date(), m = d.getMonth() + 1, day = d.getDate();
+  return d.getFullYear() + "-" + (m < 10 ? "0" : "") + m + "-" + (day < 10 ? "0" : "") + day;
+}
+/* a snapshot of the trip as it stands now — names and sizes frozen, so a
+   later rename or a deleted item cannot rewrite what you actually bought */
+function tripFromNow(){
+  var items = [];
+  CATS.forEach(function(c){
+    c.items.forEach(function(it){
+      if(!S.sel[it.id]) return;
+      items.push({ id: it.id, name: it.name, cat: c.key, catn: c.name,
+                   qty: S.qty[it.id] || "", sz: sizeOf(it.id),
+                   est: estOf(it.id) * qtyOf(it.id), paid: priceOf(it.id),
+                   got: !!S.done[it.id] });
+    });
+  });
+  if(!items.length) return null;
+  var spent = 0, est = 0;
+  items.forEach(function(i){ spent += i.paid; est += i.est; });
+  var r = S.receipt || {};
+  return { tid: "t" + Date.now().toString(36) + Math.floor(Math.random() * 1e4).toString(36),
+           date: S.meta.date || todayISO(), store: S.meta.store || "", notes: S.meta.notes || "",
+           cur: S.cur, items: items, spent: spent, est: est,
+           img: r.img || "", rtext: r.text || "" };
+}
+/* receipt photos are the only heavy thing here, so only the recent ones keep theirs */
+var KEEPSHOTS = 12;
+function fitTrips(){
+  var trimmed = false;
+  for(var k = KEEPSHOTS; k < S.trips.length; k++){
+    if(S.trips[k].img){ S.trips[k].img = ""; trimmed = true; }
+  }
+  if(saveNow()) return trimmed ? "trimmed" : true;
+  for(var i = S.trips.length - 1; i >= 1; i--){
+    if(S.trips[i].img){
+      S.trips[i].img = "";
+      if(saveNow()) return "trimmed";
+    }
+  }
+  while(S.trips.length > 1){
+    S.trips.pop();
+    if(saveNow()) return "trimmed";
+  }
+  return saveNow() ? "trimmed" : false;
+}
+function tripTitle(t){
+  return (t.date ? fmtDate(t.date) : "Undated trip") + (t.store ? " · " + t.store : "");
+}
+function buildHistory(){
+  var trips = S.trips || [];
+  $("#histbar").hidden = !trips.length;
+  var sum = 0;
+  trips.forEach(function(t){ sum += t.spent || 0; });
+  $("#histn").textContent = trips.length;
+  $("#histsum").textContent = S.cur + " " + money(sum);
+  $("#histavg").textContent = trips.length ? S.cur + " " + money(sum / trips.length) : "—";
+  $("#histsub").textContent = trips.length
+    ? trips.length + (trips.length === 1 ? " trip saved." : " trips saved.")
+      + " Open one to see every item and what it cost."
+    : "Nothing saved yet.";
+  if(!trips.length){
+    $("#histbody").innerHTML = '<p class="empty">No past trips yet. Finish a shopping trip on the '
+      + '<b>What I bought</b> page and press <b>Finish trip &amp; save it</b>.</p>';
+    return 0;
+  }
+  var html = "";
+  trips.forEach(function(t, ti){
+    var got = 0, rows = "", lastCat = "";
+    t.items.forEach(function(i){
+      if(i.got || i.paid) got++;
+      if(i.catn !== lastCat){
+        lastCat = i.catn;
+        rows += '<tr class="grouprow c-' + esc(i.cat) + '"><th colspan="5" scope="colgroup">'
+              + esc(i.catn) + '</th></tr>';
+      }
+      rows += '<tr class="' + (i.got || i.paid ? "bought" : "notbought") + '">'
+        + '<td class="tick"><span class="pbox' + (i.got || i.paid ? " ticked" : "") + '" aria-hidden="true"></span>'
+        + '<span class="sr">' + (i.got || i.paid ? "Bought" : "Not bought") + '</span></td>'
+        + '<td class="nm2">' + esc(i.name) + '</td>'
+        + '<td class="sz">' + esc(i.sz || "") + '</td>'
+        + '<td class="qty">' + esc(i.qty || "") + '</td>'
+        + '<td class="price">' + (i.paid ? esc((t.cur || S.cur) + " " + money(i.paid)) : "") + '</td></tr>';
+    });
+    var diff = (t.spent || 0) - (t.est || 0);
+    html += '<details class="trip"' + (ti === 0 ? " open" : "") + ' data-tid="' + esc(t.tid) + '">'
+      + '<summary><span class="tdate">' + esc(tripTitle(t)) + '</span>'
+      + '<span class="tcount">' + got + " of " + t.items.length + ' bought</span>'
+      + '<span class="tspend">' + esc((t.cur || S.cur) + " " + money(t.spent || 0)) + '</span></summary>'
+      + '<div class="tbody">'
+      + (t.notes ? '<p class="tnotes">' + esc(t.notes) + '</p>' : "")
+      + '<p class="tmeta">Estimated ' + esc((t.cur || S.cur) + " " + money(t.est || 0)) + ' · '
+      + (diff >= 0 ? "over by " : "under by ") + esc((t.cur || S.cur) + " " + money(Math.abs(diff)))
+      + '</p>'
+      + (t.img ? '<button type="button" class="rcthumb" data-act="zoom">'
+                 + '<img src="' + t.img + '" alt="Receipt for ' + esc(tripTitle(t)) + '"></button>' : "")
+      + '<div class="ttable"><table class="listtable"><thead><tr>'
+      + '<th class="tick">Got</th><th>Item</th><th class="sz">Size</th>'
+      + '<th class="qty">Quantity</th><th class="price">Paid</th></tr></thead>'
+      + '<tbody>' + rows + '</tbody></table></div>'
+      + '<div class="tacts">'
+      + '<button type="button" class="btn" data-act="repeat">Put this list back</button>'
+      + '<button type="button" class="btn" data-act="pdf">PDF of this trip</button>'
+      + '<button type="button" class="btn btn-ghost" data-act="del">Delete</button>'
+      + '</div></div></details>';
+  });
+  $("#histbody").innerHTML = html;
+  return trips.length;
+}
+function tripById(tid){
+  for(var i = 0; i < S.trips.length; i++){ if(S.trips[i].tid === tid) return S.trips[i]; }
+  return null;
+}
+$("#histbody").addEventListener("click", function(e){
+  var btn = e.target.closest("[data-act]"); if(!btn) return;
+  var det = btn.closest(".trip"), t = tripById(det.dataset.tid);
+  if(!t) return;
+  var act = btn.dataset.act;
+  if(act === "zoom"){ showShot(t.img, tripTitle(t)); return; }
+  if(act === "del"){
+    if(!confirm('Delete "' + tripTitle(t) + '"?\n\nThis trip and its receipt are removed for good.')) return;
+    S.trips = S.trips.filter(function(x){ return x.tid !== t.tid; });
+    saveNow(); buildHistory(); toast("Trip deleted");
+    return;
+  }
+  if(act === "repeat"){
+    var gone = 0, n = 0;
+    t.items.forEach(function(i){ if(!BYID[i.id]) gone++; });
+    if(!confirm('Put "' + tripTitle(t) + '" back on the shopping list?\n\n'
+      + t.items.length + (t.items.length === 1 ? " item is" : " items are") + " ticked again"
+      + (gone ? ", except " + gone + " no longer in the checklist" : "")
+      + ". Anything ticked now stays ticked. Prices you paid are not copied over.")) return;
+    t.items.forEach(function(i){
+      if(!BYID[i.id]) return;
+      S.sel[i.id] = 1;
+      if(i.qty) S.qty[i.id] = i.qty;
+      delete S.done[i.id]; delete S.price[i.id];
+      n++;
+    });
+    paintAll(); save(); showList();
+    toast(n + (n === 1 ? " item" : " items") + " back on your list");
+    return;
+  }
+  if(act === "pdf"){
+    var label = btn.textContent;
+    btn.disabled = true; btn.textContent = "Building…";
+    makePdf({trips: [t], only: true, name: "grocery-trip-" + (t.date || todayISO()) + ".pdf"})
+      .then(function(res){
+        btn.disabled = false; btn.textContent = label;
+        toast(res === "declined" ? "Save cancelled" : "PDF saved");
+      }).catch(function(){
+        btn.disabled = false; btn.textContent = label;
+        toast("The PDF could not be built");
+      });
+  }
+});
+/* a receipt photo, full size */
+function showShot(src, label){
+  if(!src) return;
+  var ov = document.createElement("div");
+  ov.className = "shotov";
+  ov.innerHTML = '<button type="button" class="shotclose" aria-label="Close">&times;</button>'
+    + '<img src="' + src + '" alt="' + esc(label || "Receipt") + '">';
+  ov.addEventListener("click", function(){ ov.remove(); });
+  document.body.appendChild(ov);
+}
+document.addEventListener("keydown", function(e){
+  if(e.key === "Escape"){ var ov = $(".shotov"); if(ov) ov.remove(); }
+});
+
+$("#savetrip").addEventListener("click", function(){
+  var t = tripFromNow();
+  if(!t){ toast("Nothing on this list to save"); return; }
+  var got = t.items.filter(function(i){ return i.got || i.paid; }).length;
+  if(!confirm("Save this trip to Previous Groceries?\n\n" + tripTitle(t) + "\n"
+    + got + " of " + t.items.length + " items bought · " + t.cur + " " + money(t.spent)
+    + (t.img ? "\nThe receipt photo is saved with it." : "")
+    + "\n\nIt is kept on this device only — use Backup to move it to another phone.")) return;
+  S.trips.unshift(t);
+  if(S.trips.length > MAXTRIPS) S.trips = S.trips.slice(0, MAXTRIPS);
+  var fit = fitTrips();
+  if(!fit){ S.trips.shift(); toast("No room left in browser storage — the trip was not saved"); return; }
+  S.receipt = null;
+  paintReceipt(); $("#rcmatch").hidden = true; $("#rcmatch").innerHTML = "";
+  saveNow();
+  toast(fit === "trimmed" ? "Trip saved — older receipt photos were dropped to make room"
+                          : "Trip saved to Previous Groceries");
+  if(confirm("Saved.\n\nClear the ticked items and start a fresh list?\n\n"
+    + "The trip you just saved keeps its own copy, so nothing is lost.")){
+    selectedIds().forEach(wipe);
+    S.meta.notes = "";
+    $("#mnotes").value = "";
+    paintAll(); syncMeta(); saveNow();
+    showHistory();
+  }else{
+    showHistory();
+  }
+});
+
+/* ---------- the receipt ---------- */
+function paintReceipt(){
+  var r = S.receipt || {img: "", text: ""}, img = $("#rcimg");
+  if(r.img){
+    img.src = r.img; img.hidden = false;
+    $("#rcnone").hidden = true; $("#rcdel").hidden = false;
+    $("#rcadd").textContent = "Replace photo";
+  }else{
+    img.removeAttribute("src"); img.hidden = true;
+    $("#rcnone").hidden = false; $("#rcdel").hidden = true;
+    $("#rcadd").textContent = "Add receipt photo";
+  }
+  if(document.activeElement !== $("#rctext")) $("#rctext").value = r.text || "";
+}
+function shrinkImage(file, maxpx, q){
+  return new Promise(function(res, rej){
+    var fr = new FileReader();
+    fr.onerror = function(){ rej(); };
+    fr.onload = function(){
+      var im = new Image();
+      im.onload = function(){
+        try{
+          var w = im.naturalWidth, h = im.naturalHeight;
+          var sc = Math.min(1, maxpx / Math.max(w, h));
+          var cw = Math.max(1, Math.round(w * sc)), ch = Math.max(1, Math.round(h * sc));
+          var cv = document.createElement("canvas"); cv.width = cw; cv.height = ch;
+          var cx = cv.getContext("2d");
+          if(!cx){ res(fr.result); return; }
+          cx.fillStyle = "#fff"; cx.fillRect(0, 0, cw, ch);
+          cx.drawImage(im, 0, 0, cw, ch);
+          res(cv.toDataURL("image/jpeg", q));
+        }catch(e){ res(fr.result); }
+      };
+      im.onerror = function(){ rej(); };
+      im.src = fr.result;
+    };
+    fr.readAsDataURL(file);
+  });
+}
+$("#rcadd").addEventListener("click", function(){ $("#rcfile").value = ""; $("#rcfile").click(); });
+$("#rcimg").addEventListener("click", function(){ showShot(this.getAttribute("src"), "Receipt"); });
+$("#rcfile").addEventListener("change", function(){
+  var f = this.files && this.files[0]; if(!f) return;
+  shrinkImage(f, 1400, 0.62).then(function(url){
+    var r = S.receipt || (S.receipt = {img: "", text: ""});
+    var before = r.img;
+    r.img = url;
+    if(!saveNow()){
+      r.img = before; paintReceipt();
+      toast("That photo is too big for browser storage — try a tighter crop");
+      return;
+    }
+    paintReceipt();
+    toast("Receipt photo saved with this trip");
+  }).catch(function(){ toast("That photo could not be read"); });
+});
+$("#rcdel").addEventListener("click", function(){
+  if(!S.receipt) return;
+  S.receipt.img = "";
+  if(!S.receipt.text) S.receipt = null;
+  saveNow(); paintReceipt(); toast("Photo removed");
+});
+$("#rctext").addEventListener("input", function(){
+  var v = this.value;
+  if(v.trim()){
+    var r = S.receipt || (S.receipt = {img: "", text: ""});
+    r.text = v;
+  }else if(S.receipt){
+    S.receipt.text = "";
+    if(!S.receipt.img) S.receipt = null;
+  }
+  save();
+});
+$("#rcclear").addEventListener("click", function(){
+  $("#rctext").value = "";
+  if(S.receipt){ S.receipt.text = ""; if(!S.receipt.img) S.receipt = null; }
+  $("#rcmatch").hidden = true; $("#rcmatch").innerHTML = "";
+  saveNow();
+});
+
+/* Lines a receipt has that are not shopping: totals, change, tax, the shop's own details */
+var RCSKIP = /^(sub[- ]?total|total|jumlah|tunai|cash|kad|card|debit|credit|change|baki|wang|gst|sst|cukai|tax|rounding|pembundaran|adjustment|discount|diskaun|rebate|saving|jimat|item count|qty|kuantiti|no\b|inv|invoice|resit|receipt|bil\b|tel\b|fax|reg\b|gst id|thank|terima kasih|sila|please|www\.|http|cashier|juruwang|counter|kaunter|member|ahli|point|mata|balance|amount due|net\b|round)/i;
+/* "1 X 4.69" or "2 @ 3.50" — a quantity line, its price belongs to the item above */
+var RCQTY = /^\s*\d+(?:\.\d+)?\s*(?:x|@|pcs?|kg|g)\b/i;
+
+function parseReceipt(txt){
+  var out = [], pending = "";
+  String(txt || "").split(/[\r\n]+/).forEach(function(raw){
+    var line = raw.replace(/\s+/g, " ").trim();
+    if(!line || line.length < 3){ pending = ""; return; }
+    if(RCSKIP.test(line)){ pending = ""; return; }
+    var m = line.match(/^(.*?)\s*(?:rm|myr)?\s*(\d{1,5}[.,]\d{2})\s*(?:[a-z]{1,3})?$/i);
+    if(!m){
+      /* a name on its own: many receipts price it on the line below */
+      var nm = line.replace(/^\d{6,}\s*/, "").replace(/[\s.\-*]+$/, "").trim();
+      pending = (nm.length >= 3 && /[a-z]{3}/i.test(nm)) ? nm : "";
+      return;
+    }
+    var name = m[1].replace(/^\d{6,}\s*/, "").replace(/[\s.\-*]+$/, "").trim();
+    var price = parseFloat(m[2].replace(",", "."));
+    if(!isFinite(price) || price <= 0 || price > 9999){ pending = ""; return; }
+    if(!name || RCQTY.test(name) || !/[a-z]{3}/i.test(name)){
+      /* a bare "1 X 4.99" line: it prices the name just above it */
+      if(pending){ out.push({raw: line, name: pending, price: price}); pending = ""; }
+      else if(out.length) out[out.length - 1].price = price;
+      return;
+    }
+    if(RCSKIP.test(name)){ pending = ""; return; }
+    out.push({raw: line, name: name, price: price});
+    pending = "";
+  });
+  return out;
+}
+
+/* English and Malay names for the same thing, so a Malay receipt finds an
+   English catalogue entry and the other way round */
+var PAIRS = [
+  ["garlic","bawang putih"],["shallot","bawang merah"],["onion","bawang besar"],
+  ["potato","kentang"],["carrot","lobak merah"],["cucumber","timun"],["chilli","cili"],
+  ["chili","cili"],["ginger","halia"],["turmeric","kunyit"],["lemongrass","serai"],
+  ["galangal","lengkuas"],["celery","saderi"],["celery","daun sup"],["coriander","ketumbar"],
+  ["spring onion","daun bawang"],["scallion","daun bawang"],["lime","limau"],["cabbage","kobis"],
+  ["mustard green","sawi"],["spinach","bayam"],["water spinach","kangkung"],
+  ["broccoli","brokoli"],["cauliflower","kubis bunga"],["long bean","kacang panjang"],
+  ["okra","bendi"],["ladys finger","bendi"],["eggplant","terung"],["brinjal","terung"],
+  ["bean sprout","taugeh"],["mushroom","cendawan"],["corn","jagung"],["pumpkin","labu"],
+  ["lettuce","salad"],["french bean","kacang buncis"],["chicken","ayam"],["beef","daging lembu"],
+  ["fish","ikan"],["prawn","udang"],["shrimp","udang"],["squid","sotong"],
+  ["anchovy","ikan bilis"],["egg","telur"],["sausage","sosej"],["rice","beras"],
+  ["vermicelli","bihun"],["noodle","mi"],["noodle","mee"],["bread","roti"],["flour","tepung"],
+  ["oil","minyak"],["salt","garam"],["sugar","gula"],["soy sauce","kicap"],
+  ["oyster sauce","sos tiram"],["vinegar","cuka"],["fish sauce","sos ikan"],["pepper","lada"],
+  ["curry","kari"],["tamarind","asam jawa"],["shrimp paste","belacan"],["coconut milk","santan"],
+  ["milk","susu"],["condensed","pekat"],["evaporated","cair"],["butter","mentega"],
+  ["cheese","keju"],["coffee","kopi"],["tea","teh"],["banana","pisang"],["apple","epal"],
+  ["papaya","betik"],["mango","mangga"],["avocado","avokado"],["sweet potato","keledek"],
+  ["sweet potato","ubi"],["oats","oat"],["sardine","sardin"],["seasoning","perasa"],
+  ["detergent","pencuci"],["dishwash","pinggan"],["floor cleaner","pencuci lantai"],
+  ["bleach","peluntur"],["garbage bag","beg sampah"],["tissue","tisu"],["towel","tuala"],
+  ["soap","sabun"],["shampoo","syampu"],["toothpaste","ubat gigi"],["toothbrush","berus gigi"],
+  ["diaper","lampin"],["diaper","pampers"],["razor","pencukur"],["wipes","wipe"],
+  ["baby","bayi"],["water","air"],["frozen","sejuk beku"],["minced","kisar"],["whole","seekor"]
+];
+function rnorm(s){
+  return String(s || "").toLowerCase()
+    .replace(/[^a-z0-9 ]+/g, " ")
+    .replace(/\b\d+(?:\.\d+)?\s*(?:kgs?|gms?|grams?|g|ml|ltr|l|pcs?|pkts?|peks?|packs?|bdl|tins?|cans?|s)\b/g, " ")
+    .replace(/\b\d+\b/g, " ")
+    .replace(/\b(lotuss|lotus|tesco|value|brand|jumbo|pack|pkt|pek|isi|new|halal|per|kg|gm|ml|pcs|pc|ea|x)\b/g, " ")
+    .replace(/\s+/g, " ").trim();
+}
+function rtokens(str){
+  var t = rnorm(str), pad = " " + t + " ", set = {}, out = [];
+  t.split(" ").forEach(function(x){ if(x) set[x] = 1; });
+  PAIRS.forEach(function(p){
+    if(pad.indexOf(" " + p[0] + " ") !== -1 || pad.indexOf(" " + p[1] + " ") !== -1){
+      (p[0] + " " + p[1]).split(" ").forEach(function(x){ set[x] = 1; });
+    }
+  });
+  Object.keys(set).forEach(function(k){ out.push(k); });
+  return out;
+}
+function hitsIn(t, list){
+  for(var i = 0; i < list.length; i++){
+    var u = list[i];
+    if(u === t) return true;
+    if(t.length >= 4 && u.indexOf(t) === 0) return true;
+    if(u.length >= 4 && t.indexOf(u) === 0) return true;
+  }
+  return false;
+}
+function tokScore(a, b){
+  var need = 0, hit = 0, strong = 0;
+  a.forEach(function(t){
+    if(t.length < 3) return;
+    need++;
+    if(hitsIn(t, b)){ hit++; if(t.length >= 4) strong++; }
+  });
+  if(!need || !strong) return 0;
+  var need2 = 0, rev = 0;
+  b.forEach(function(u){
+    if(u.length < 3) return;
+    need2++;
+    if(hitsIn(u, a)) rev++;
+  });
+  return 0.68 * (hit / need) + 0.32 * (rev / (need2 || 1));
+}
+var TOKCACHE = {};
+function itemTokens(id){
+  if(!TOKCACHE[id]){
+    TOKCACHE[id] = rtokens((BYID[id] || "") + " " + (SEED[id] ? SEED[id].t : ""));
+  }
+  return TOKCACHE[id];
+}
+function bestMatch(line, ids){
+  var best = null, bestS = 0;
+  var a = rtokens(line);
+  ids.forEach(function(id){
+    var sc = tokScore(a, itemTokens(id));
+    if(sc > bestS){ bestS = sc; best = id; }
+  });
+  return {id: best, score: bestS};
+}
+function scanReceipt(){
+  var txt = $("#rctext").value;
+  var lines = parseReceipt(txt);
+  var ids = selectedIds();
+  var box = $("#rcmatch");
+  if(!ids.length){
+    box.hidden = false;
+    box.innerHTML = '<p class="empty">Nothing is on your list yet, so there is nothing to match against.</p>';
+    return;
+  }
+  if(!lines.length){
+    box.hidden = false;
+    box.innerHTML = '<p class="empty">No priced lines found in that text. A line needs a name and an '
+      + 'amount, like <b>LOTUSS TOMATO 600G 4.69</b>. You can still type prices into the list below.</p>';
+    return;
+  }
+  var opts = "";
+  CATS.forEach(function(c){
+    var got = c.items.filter(function(it){ return S.sel[it.id]; });
+    if(!got.length) return;
+    opts += '<optgroup label="' + esc(c.name) + '">';
+    got.forEach(function(it){ opts += '<option value="' + esc(it.id) + '">' + esc(it.name) + '</option>'; });
+    opts += '</optgroup>';
+  });
+  var rows = "", auto = 0;
+  lines.forEach(function(ln, i){
+    var m = bestMatch(ln.name, ids);
+    var sure = m.score >= 0.55, maybe = m.score >= 0.34;
+    if(sure) auto++;
+    var sel = '<select class="rcsel" aria-label="Which item is this?"><option value="">— skip —</option>'
+      + opts.replace('value="' + esc(m.id || "@none@") + '"', 'value="' + esc(m.id || "@none@") + '" selected')
+      + '</select>';
+    if(!maybe) sel = sel.replace(' selected', '');
+    rows += '<tr data-i="' + i + '">'
+      + '<td class="rcline">' + esc(ln.name) + '</td>'
+      + '<td class="rcpick">' + sel
+      + '<span class="rcsure ' + (sure ? "yes" : (maybe ? "mid" : "no")) + '">'
+      + (sure ? "good match" : (maybe ? "not sure" : "no match")) + '</span></td>'
+      + '<td class="price"><input class="rcprice" type="text" inputmode="decimal" autocomplete="off"'
+      + ' aria-label="Price from the receipt" value="' + esc(money(ln.price)) + '"></td>'
+      + '<td class="tick"><input type="checkbox" class="rcuse" aria-label="Use this line"'
+      + (sure ? " checked" : "") + '></td></tr>';
+  });
+  box.hidden = false;
+  box.innerHTML = '<h4>' + lines.length + (lines.length === 1 ? " priced line" : " priced lines")
+      + ' read · ' + auto + ' matched on their own</h4>'
+    + '<p class="rcnote">Check the middle column before you fill anything in — change any row that '
+      + 'picked the wrong item, untick the ones you do not want.</p>'
+    + '<div class="rctable"><table class="listtable"><thead><tr><th>On the receipt</th>'
+    + '<th>Goes to</th><th class="price">Price</th><th class="tick">Use</th></tr></thead><tbody>'
+    + rows + '</tbody></table></div>'
+    + '<div class="rcbtns"><button type="button" class="btn btn-primary" id="rcapply">Fill in the ticked prices</button>'
+    + '<button type="button" class="btn btn-ghost" id="rcnone2">Untick all</button></div>';
+}
+$("#rcscan").addEventListener("click", scanReceipt);
+$("#rcmatch").addEventListener("click", function(e){
+  if(e.target.id === "rcnone2"){
+    $$(".rcuse", $("#rcmatch")).forEach(function(cb){ cb.checked = false; });
+    return;
+  }
+  if(e.target.id !== "rcapply") return;
+  var filled = 0, byId = {};
+  $$("#rcmatch tbody tr").forEach(function(tr){
+    if(!$(".rcuse", tr).checked) return;
+    var id = $(".rcsel", tr).value; if(!id || !S.sel[id]) return;
+    var v = parseFloat(String($(".rcprice", tr).value).replace(/[^0-9.]/g, ""));
+    if(!isFinite(v) || v <= 0) return;
+    byId[id] = (byId[id] || 0) + v;      /* two receipt lines for one item add up */
+  });
+  Object.keys(byId).forEach(function(id){
+    S.price[id] = money(byId[id]);
+    S.done[id] = 1;
+    filled++;
+  });
+  if(!filled){ toast("Nothing ticked to fill in"); return; }
+  saveNow(); buildBought(); buildList();
+  toast(filled + (filled === 1 ? " price filled in" : " prices filled in"));
+});
+
+/* ---------- history view ---------- */
+function showHistory(){
+  S.view = "history"; save(); applyPics();
+  buildHistory();
+  $("#checklist").hidden = true; $("#listview").hidden = true; $("#boughtview").hidden = true;
+  $("#histview").hidden = false;
+  $("#deck").hidden = true; $("#hint").hidden = true; $("#dock").hidden = true;
+  document.body.classList.add("printhist");
+  window.scrollTo(0, 0);
+}
+$("#tohist").addEventListener("click", showHistory);
+$("#tohist2").addEventListener("click", showHistory);
+$("#histback").addEventListener("click", function(){
+  if(selectedIds().length) showList(); else showEdit();
+});
+$("#withhist").addEventListener("change", function(){ S.pdfhist = this.checked; save(); });
+$$(".js-histpdf").forEach(function(b){ b.addEventListener("click", function(){
+  var btn = this, label = btn.textContent;
+  if(!S.trips.length){ toast("No past trips to save yet"); return; }
+  btn.disabled = true; btn.textContent = "Building PDF…";
+  makePdf({trips: S.trips.slice(0, MAXHISTPDF), only: true,
+           name: "previous-groceries-" + todayISO() + ".pdf"}).then(function(res){
+    btn.disabled = false; btn.textContent = label;
+    if(res === "declined") toast("Save cancelled");
+    else if(res === "busy") toast("A save is already waiting — try again in a moment");
+    else toast("PDF saved");
+  }).catch(function(){
+    btn.disabled = false; btn.textContent = label;
+    toast("The PDF could not be built");
+  });
+}); });
+
 /* ---------- boot ---------- */
 load();
 seedEstimates();
@@ -1717,8 +2655,9 @@ S.custom = S.custom.filter(function(c){ return c && c.id && c.key && c.name; });
 S.custom.forEach(function(c){ registerItem(c.key, c.id, c.name); });
 $("#mdate").value = S.meta.date; $("#mstore").value = S.meta.store; $("#mnotes").value = S.meta.notes;
 $("#mcur").value = S.cur;
-paintAll(); syncMeta(); runSearch(); applyPics();
-if(selectedIds().length && S.view === "bought") showBought();
+paintAll(); syncMeta(); runSearch(); applyPics(); paintReceipt(); paintHistOpt();
+if(S.view === "history") showHistory();
+else if(selectedIds().length && S.view === "bought") showBought();
 else if(selectedIds().length && S.view === "list") showList();
 else showEdit();
 })();
